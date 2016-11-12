@@ -89,12 +89,16 @@ void AMovingObject::Tick( float deltaTime )
 {
 	Super::Tick( deltaTime );
 
-	FVector new_location = GetActorLocation();
-	float delta_height = (FMath::Sin(running_time_ + deltaTime) - FMath::Sin(running_time_));
-	new_location.Y += (delta_height * speed_);
-	running_time_ += deltaTime;
-	SetActorLocation(new_location);
-
+	//FVector new_location = GetActorLocation();
+	//float delta_height = (FMath::Sin(running_time_ + deltaTime) - FMath::Sin(running_time_));
+	//new_location.Y += (delta_height * speed_);
+	
+	FVector velocity = CalculateMovement(deltaTime);
+	FVector new_position = GetActorLocation();
+	//float delta_height = (velocity + deltaTime) - velocity;
+	new_position += velocity;
+	SetActorLocation(new_position);
+	
 	/*FVector velocity = CalculateMovement(deltaTime);
 	AddActorLocalOffset(velocity);
 
