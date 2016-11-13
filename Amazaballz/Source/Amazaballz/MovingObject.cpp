@@ -3,118 +3,145 @@
 #include "Amazaballz.h"
 #include "MovingObject.h"
 
+/*
 
-// Sets default values
+	Overview
+	========
+	This will be used to initialise attributes and decide update usage.
+
+*/
 AMovingObject::AMovingObject()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	// Initialising the root component.
 	root_ = CreateDefaultSubobject<UBoxComponent>(TEXT("Box"));
 	RootComponent = root_;
 
+	// Initialising the static mesh component.
 	mesh_ = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	mesh_->AttachTo(RootComponent);
-
-	running_time_ = 0.0f;
 }
 
-// Called when the game starts or when spawned
+/*
+
+	Overview
+	========
+	This method is called when the game starts or when this object is spawned in.
+
+*/
 void AMovingObject::BeginPlay()
 {
+	// Call base Actor begin play.
 	Super::BeginPlay();
-	
-	//components_ = GetComponents().Array();
 
+	// Loop through each of the waypoints.
 	for (int i = 0; i < local_waypoints_.Num(); i++)
-	{
+	{	
+		// Add a new waypoint to the global waypoints.
 		global_waypoints_.Emplace(local_waypoints_[i] + GetActorLocation());
 	}
-
-	/*if (components_.Num() != 0)
-	{
-		for (int i = 0; i < components_.Num(); i++)
-		{
-			UStaticMeshComponent* temp_static_mesh = Cast<UStaticMeshComponent>(components_[i]);
-
-			if (temp_static_mesh)
-			{
-				static_mesh_ = temp_static_mesh;
-			}
-		}
-	}*/
 }
 
+/*
+
+	Overview
+	========
+	Here we just decide what happens when the object has reached it's current destination.
+
+*/
 void AMovingObject::NextPoint()
 {
+	// Reset the percentage to the next waypoint.
 	percentage_between_waypoints_ = 0.0f;
 
+	// Increment where we are travelling from.
 	from_waypoint_index_++;
 
+	// If where we are travelling from is greater than the amount of waypoints we have provided.
 	if (from_waypoint_index_ > (global_waypoints_.Num() - 1))
 	{
+		// Reset back to the starting waypoint.
 		from_waypoint_index_ = 0;
 	}
 }
 
-FVector AMovingObject::CalculateMovement(float tick)
+/*
+
+	Overview
+	========
+	This will be used to initialise attributes and decide update usage.
+
+	Params
+	======
+	float tick	-	This is used to pass along delta time from the update method and
+					adjust object speed accordingly.
+
+*/
+FVector AMovingObject::CalculateMovement(float delta_time)
 {
+	// Initialise where we are travelling to.
 	int to_waypoint_index = 0;
 
+	// If where we are travelling from is less than the amount of waypoints we have provided.
 	if (from_waypoint_index_ < (global_waypoints_.Num() - 1))
 	{
+		// Set where we are travelling to, to be the next waypoint.
 		to_waypoint_index = from_waypoint_index_ + 1;
 	}
+	// Otherwise, if where we are travelling from is equal to the amount of waypoints we have provided.
 	else if (from_waypoint_index_ == (global_waypoints_.Num() - 1))
 	{
+		// Reset back to the starting waypoint.
 		to_waypoint_index = 0;
 	}
 
+	// Calculate how far the object is from the next waypoint.
 	float distance_between_waypoints = FVector::Dist(global_waypoints_[from_waypoint_index_], global_waypoints_[to_waypoint_index]);
 
-	percentage_between_waypoints_ += tick * (speed_ / distance_between_waypoints);
+	// Calculate the percentage of the distance travelled between the next waypoint.
+	percentage_between_waypoints_ += delta_time * (speed_ / distance_between_waypoints);
 
+	// Calculate the new position for the object.
 	FVector new_position = FMath::Lerp(global_waypoints_[from_waypoint_index_], global_waypoints_[to_waypoint_index], percentage_between_waypoints_);
 
+	// If the percentage to the next waypoint is greater than 1 (i.e. 100%).
 	if (percentage_between_waypoints_ >= 1.0f)
 	{
+		// Setup the next waypoint.
 		NextPoint();
 	}
 
+	// Return the new velocity for the object.
 	return (new_position - GetActorLocation());
 }
 
-// Called every frame
-void AMovingObject::Tick( float deltaTime )
+/*
+
+	Overview
+	========
+	This will be used to initialise attributes and decide update usage.
+
+	Params
+	======
+	float delta_time	-	Contains delta time for the last time the game was updated.
+
+*/
+void AMovingObject::Tick(float delta_time)
 {
-	Super::Tick( deltaTime );
-
-	//FVector new_location = GetActorLocation();
-	//float delta_height = (FMath::Sin(running_time_ + deltaTime) - FMath::Sin(running_time_));
-	//new_location.Y += (delta_height * speed_);
+	// Call base Actor tick method.
+	Super::Tick(delta_time);
 	
-	FVector velocity = CalculateMovement(deltaTime);
+	// Calculate the new velocity value.
+	FVector velocity = CalculateMovement(delta_time);
+
+	// Setup the new position.
 	FVector new_position = GetActorLocation();
-	//float delta_height = (velocity + deltaTime) - velocity;
+
+	// Add the velocity onto the new position.
 	new_position += velocity;
+
+	// Set the object to the new position.
 	SetActorLocation(new_position);
-	
-	/*FVector velocity = CalculateMovement(deltaTime);
-	AddActorLocalOffset(velocity);
-
-	if (root_)
-	{
-		root_->SetWorldLocation(GetActorLocation());
-	}*/
-
-	//this->UpdateComponentTransforms();
-	
-	//if (static_mesh_)
-	//{
-	//	//static_mesh_->UpdateChildTransforms();
-	//	//if(static_mesh_->Transform)
-	//	static_mesh_->SetWorldTransform(GetTransform());
-	//	static_mesh_->AddLocalOffset(GetActorLocation() - static_mesh_->GetComponentLocation());
-	//}
-
 }
