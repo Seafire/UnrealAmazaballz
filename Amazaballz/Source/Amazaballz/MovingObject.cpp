@@ -36,9 +36,11 @@ void AMovingObject::BeginPlay()
 	// Call base Actor begin play.
 	Super::BeginPlay();
 
+	if (local_waypoints_.Num() == 0)	return;
+
 	// Loop through each of the waypoints.
 	for (int i = 0; i < local_waypoints_.Num(); i++)
-	{	
+	{
 		// Add a new waypoint to the global waypoints.
 		global_waypoints_.Emplace(local_waypoints_[i] + GetActorLocation());
 	}
@@ -133,15 +135,18 @@ void AMovingObject::Tick(float delta_time)
 	// Call base Actor tick method.
 	Super::Tick(delta_time);
 	
-	// Calculate the new velocity value.
-	FVector velocity = CalculateMovement(delta_time);
+	if (!global_waypoints_.Num() == 0)
+	{
+		// Calculate the new velocity value.
+		FVector velocity = CalculateMovement(delta_time);
 
-	// Setup the new position.
-	FVector new_position = GetActorLocation();
+		// Setup the new position.
+		FVector new_position = GetActorLocation();
 
-	// Add the velocity onto the new position.
-	new_position += velocity;
+		// Add the velocity onto the new position.
+		new_position += velocity;
 
-	// Set the object to the new position.
-	SetActorLocation(new_position);
+		// Set the object to the new position.
+		SetActorLocation(new_position);
+	}
 }
