@@ -30,6 +30,7 @@ class AMAZABALLZ_API AC_BasePickup : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AC_BasePickup();
+	virtual ~AC_BasePickup();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -38,11 +39,12 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
 protected:
+	//ACharacter* player_;
+
 	UFUNCTION(BlueprintCallable, Category = "Pickups")
-		virtual void PickupResponse() PURE_VIRTUAL(AC_BasePickup::PickupResponse(), );
+		virtual void PickupResponse(ACharacter* character) PURE_VIRTUAL(AC_BasePickup::PickupResponse(ACharacter* character), );
 
 	UFUNCTION(BlueprintCallable, Category = "Pickups")
 		virtual void PickupDestroy() PURE_VIRTUAL(AC_BasePickup::PickupDestroy(), );
-
 	
 };
