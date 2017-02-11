@@ -12,17 +12,16 @@ UCLASS()
 class AMAZABALLZ_API AC_SpeedBoostPickup : public AC_BasePickup
 {
 	GENERATED_BODY()
-	
-public:
-	UPROPERTY(EditAnywhere, Category = "Pickup Properties")	// Allow this attribute to be edited anywhere within Unreal 4 under the heading Speed Pickup.
-		float speed_multiplier_;							// How fast will the player will move.
 
-protected:
-	//UFUNCTION(BlueprintCallable, Category = "Pickups")
+	protected:
+		// Methods.
+		// Overriding base pickup methods.
 		virtual void PickupResponse(AActor* actor) override;
-
-	//UFUNCTION(BlueprintCallable, Category = "Pickups")
 		virtual void PickupDestroy() override;
-	
+
+	private:
+		// Attributes.
+		UPROPERTY(EditAnywhere, Category = "Pickup Properties")	// Allow this attribute to be edited anywhere within Unreal 4 under the heading Speed Pickup.
+			float speed_multiplier_;							// How fast will the player will move.
 	
 };
