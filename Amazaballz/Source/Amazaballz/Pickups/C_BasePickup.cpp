@@ -19,6 +19,15 @@ AC_BasePickup::~AC_BasePickup()
 void AC_BasePickup::BeginPlay()
 {
 	Super::BeginPlay();
+
+	/*
+	This can be used for C++ debug comments to the editor.
+	if (GEngine)
+	{
+	GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("mesh velocity X = %f"), linear_velocity.X));
+	GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("mesh velocity Y = %f"), linear_velocity.Y));
+	GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("mesh velocity Z = %f"), linear_velocity.Z));
+	}*/
 }
 
 // Called every frame

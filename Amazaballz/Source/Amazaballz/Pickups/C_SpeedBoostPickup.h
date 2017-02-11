@@ -14,8 +14,8 @@ class AMAZABALLZ_API AC_SpeedBoostPickup : public AC_BasePickup
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(EditAnywhere, Category = "Speed Pickup")	// Allow this attribute to be edited anywhere within Unreal 4 under the heading Speed Pickup.
-		float speed_multiplier_;						// How fast will the player will move.
+	UPROPERTY(EditAnywhere, Category = "Pickup Properties")	// Allow this attribute to be edited anywhere within Unreal 4 under the heading Speed Pickup.
+		float speed_multiplier_;							// How fast will the player will move.
 
 protected:
 	//UFUNCTION(BlueprintCallable, Category = "Pickups")

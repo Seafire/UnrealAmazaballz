@@ -5,13 +5,19 @@
 
 void AC_SpeedBoostPickup::PickupResponse(ACharacter* character)
 {
-	//// Access to the player that has collided with this pickup.
-	//player_ = new ACharacter();
-	//player_ = UGameplayStatics::GetPlayerCharacter(GetWorld(), player_index);
+	// Accessing the static mesh component of the character.
+	UStaticMeshComponent* mesh = character->FindComponentByClass<UStaticMeshComponent>();
 
-	// Increase the speed of the player.
-	//player_->GetCharacterMovement()->Velocity *= speed_;
-	character->GetCharacterMovement()->Velocity *= speed_multiplier_;
+	// If the mesh exists.
+	if (mesh)
+	{
+		// Access the linear velocity of the character and multiply it by the speed multiplier.
+		FVector linear_velocity = mesh->GetPhysicsLinearVelocity();
+		FVector new_velocity = linear_velocity * speed_multiplier_;
+
+		// Increase the speed of the character.
+		mesh->SetPhysicsLinearVelocity(new_velocity);
+	}
 }
 
 void AC_SpeedBoostPickup::PickupDestroy()

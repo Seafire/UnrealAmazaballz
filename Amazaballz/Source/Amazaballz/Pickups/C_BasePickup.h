@@ -19,8 +19,11 @@
 #pragma once
 
 // Includes here.
+#include <iostream>
 #include "GameFramework/Actor.h"
 #include "C_BasePickup.generated.h"
+
+using namespace std;
 
 UCLASS(abstract)
 class AMAZABALLZ_API AC_BasePickup : public AActor
@@ -39,8 +42,6 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
 protected:
-	//ACharacter* player_;
-
 	UFUNCTION(BlueprintCallable, Category = "Pickups")
 		virtual void PickupResponse(ACharacter* character) PURE_VIRTUAL(AC_BasePickup::PickupResponse(ACharacter* character), );
 
