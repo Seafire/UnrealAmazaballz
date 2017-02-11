@@ -18,7 +18,6 @@ void AC_InvisibilityPickup::PickupResponse(AActor* actor)
 	bool is_player = actor->ActorHasTag(player_tag_);
 	UStaticMeshComponent* pickup_mesh_ = FindComponentByClass<UStaticMeshComponent>();
 	mesh_ = actor->FindComponentByClass<UStaticMeshComponent>();
-	player_controller_ = static_cast<APlayerController*>(actor);
 
 	// If this actor is a player character.
 	if (is_player)
@@ -26,19 +25,16 @@ void AC_InvisibilityPickup::PickupResponse(AActor* actor)
 		// If the mesh exists.
 		if (mesh_)
 		{
-			if (player_controller_)
+			if (!picked_up_)
 			{
-				if (!picked_up_)
-				{
-					if (pickup_mesh_ && destroyed_after_use_)
-						pickup_mesh_->SetVisibility(false);
+				if (pickup_mesh_ && destroyed_after_use_)
+					pickup_mesh_->SetVisibility(false);
 
-					mesh_->SetVisibility(false);
-					picked_up_ = true;
+				mesh_->SetVisibility(false);
+				picked_up_ = true;
 
-					// Make the player visibile after a set time.
-					GetWorldTimerManager().SetTimer(unused_handle_, this, &AC_InvisibilityPickup::Visibility, invisibility_timer_, false);
-				}
+				// Make the player visibile after a set time.
+				GetWorldTimerManager().SetTimer(unused_handle_, this, &AC_InvisibilityPickup::Visibility, invisibility_timer_, false);
 			}
 		}
 	}

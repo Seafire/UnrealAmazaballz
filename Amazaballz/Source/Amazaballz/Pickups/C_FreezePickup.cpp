@@ -9,8 +9,9 @@ void AC_FreezePickup::UnFreeze()
 
 	// If the body is static.
 	// Make the body dynamic.
-	if (!mesh_->GetBodyInstance()->IsInstanceSimulatingPhysics())
-		mesh_->GetBodyInstance()->SetInstanceSimulatePhysics(true);
+	//if (!mesh_->GetBodyInstance()->IsInstanceSimulatingPhysics())
+	
+	mesh_->GetBodyInstance()->SetInstanceSimulatePhysics(true);
 
 	if (destroyed_after_use_)
 		PickupDestroy();
@@ -43,6 +44,9 @@ void AC_FreezePickup::PickupResponse(AActor* actor)
 					if(pickup_mesh_ && destroyed_after_use_)
 						pickup_mesh_->SetVisibility(false);
 
+					if (mesh_->GetBodyInstance()->IsInstanceSimulatingPhysics())
+						mesh_->GetBodyInstance()->SetInstanceSimulatePhysics(false);
+
 					// Use this for invisibility.
 					//mesh_->SetVisibility(false);
 
@@ -74,7 +78,6 @@ void AC_FreezePickup::Tick(float DeltaTime)
 
 		// If the body is dynamic.
 		// Make the body static.
-		if(mesh_->GetBodyInstance()->IsInstanceSimulatingPhysics())
-			mesh_->GetBodyInstance()->SetInstanceSimulatePhysics(false);
+		
 	}
 }
