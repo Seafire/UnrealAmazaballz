@@ -40,7 +40,7 @@ void AC_FreezePickup::PickupResponse(AActor* actor)
 					// Reset the speed of the player.
 					mesh_->SetPhysicsLinearVelocity(FVector::ZeroVector);
 
-					if(pickup_mesh_)
+					if(pickup_mesh_ && destroyed_after_use_)
 						pickup_mesh_->SetVisibility(false);
 
 					// Use this for invisibility.

@@ -31,7 +31,7 @@ void AC_SlowMotionPickup::PickupResponse(AActor* actor)
 			{
 				if (!picked_up_)
 				{
-					if (pickup_mesh_)
+					if (pickup_mesh_ && destroyed_after_use_)
 						pickup_mesh_->SetVisibility(false);
 
 					picked_up_ = true;
@@ -55,8 +55,7 @@ void AC_SlowMotionPickup::Tick(float DeltaTime)
 {
 	if (picked_up_)
 	{
-		// This only slows the player down.
-		// Use this for slow motion pickup.
+		// This will slow the player down.
 		mesh_->SetPhysicsLinearVelocity(mesh_->GetPhysicsLinearVelocity() * slow_motion_factor_);
 		mesh_->SetPhysicsAngularVelocity(mesh_->GetPhysicsAngularVelocity() * slow_motion_factor_);
 	}
