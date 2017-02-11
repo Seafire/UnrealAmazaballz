@@ -28,9 +28,6 @@ class AMAZABALLZ_API AC_FreezePickup : public AC_BasePickup
 		UPROPERTY(EditAnywhere, Category = "Pickup Properties")	// How long will all of the other players be frozen for?
 			float freeze_timer_;
 
-		UFUNCTION(BlueprintCallable, Category = "Pickups")
-			inline float const GetFreezeTimer() const { return freeze_timer_; }
-
 		bool picked_up_ = false;
 		FTimerHandle unused_handle_;
 		UStaticMeshComponent* mesh_ = nullptr;
