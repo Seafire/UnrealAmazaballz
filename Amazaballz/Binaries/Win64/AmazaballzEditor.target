@@ -2,7 +2,7 @@
 	"TargetName" : "AmazaballzEditor",
 	"Platform" : "Win64",
 	"Configuration" : "Development",
-	"BuildId" : "1f3c2ad8-656e-4d86-9d2e-fad3aea2d66b",
+	"BuildId" : "eafb2796-8d99-4f10-9046-be1735afad55",
 	"Version" : 
 	{
 		"MajorVersion" : 4,
@@ -15,15 +15,15 @@
 	"BuildProducts" :
 	[
 		{
-			"Path" : "$(ProjectDir)/Binaries/Win64/UE4Editor-Amazaballz-2036.dll",
+			"Path" : "$(ProjectDir)/Binaries/Win64/UE4Editor-Amazaballz-3238.dll",
 			"Type" : "DynamicLibrary"
 		},
 		{
-			"Path" : "$(ProjectDir)/Binaries/Win64/UE4Editor-Amazaballz-2036.pdb",
+			"Path" : "$(ProjectDir)/Binaries/Win64/UE4Editor-Amazaballz-3238.pdb",
 			"Type" : "SymbolFile"
 		},
 		{
-			"Path" : "$(ProjectDir)/Intermediate/Build/Win64/UE4Editor/Development/UE4Editor-Amazaballz-2036.lib",
+			"Path" : "$(ProjectDir)/Intermediate/Build/Win64/UE4Editor/Development/UE4Editor-Amazaballz-3238.lib",
 			"Type" : "ImportLibrary"
 		}
 	],

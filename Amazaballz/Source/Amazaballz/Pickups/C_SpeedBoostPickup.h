@@ -19,7 +19,7 @@ public:
 
 protected:
 	//UFUNCTION(BlueprintCallable, Category = "Pickups")
-		virtual void PickupResponse(ACharacter* character) override;
+		virtual void PickupResponse(AActor* actor) override;
 
 	//UFUNCTION(BlueprintCallable, Category = "Pickups")
 		virtual void PickupDestroy() override;

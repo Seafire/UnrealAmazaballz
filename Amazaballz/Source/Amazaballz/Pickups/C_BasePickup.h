@@ -43,7 +43,7 @@ public:
 
 protected:
 	UFUNCTION(BlueprintCallable, Category = "Pickups")
-		virtual void PickupResponse(ACharacter* character) PURE_VIRTUAL(AC_BasePickup::PickupResponse(ACharacter* character), );
+		virtual void PickupResponse(AActor* actor) PURE_VIRTUAL(AC_BasePickup::PickupResponse(AActor* actor), );
 
 	UFUNCTION(BlueprintCallable, Category = "Pickups")
 		virtual void PickupDestroy() PURE_VIRTUAL(AC_BasePickup::PickupDestroy(), );

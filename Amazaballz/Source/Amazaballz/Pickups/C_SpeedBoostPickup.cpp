@@ -3,10 +3,10 @@
 #include "Amazaballz.h"
 #include "C_SpeedBoostPickup.h"
 
-void AC_SpeedBoostPickup::PickupResponse(ACharacter* character)
+void AC_SpeedBoostPickup::PickupResponse(AActor* actor)
 {
 	// Accessing the static mesh component of the character.
-	UStaticMeshComponent* mesh = character->FindComponentByClass<UStaticMeshComponent>();
+	UStaticMeshComponent* mesh = actor->FindComponentByClass<UStaticMeshComponent>();
 
 	// If the mesh exists.
 	if (mesh)
