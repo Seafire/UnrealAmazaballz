@@ -6,10 +6,6 @@
 void AC_FreezePickup::UnFreeze()
 {
 	picked_up_ = false;
-
-	// If the body is static.
-	// Make the body dynamic.
-	//if (!mesh_->GetBodyInstance()->IsInstanceSimulatingPhysics())
 	
 	mesh_->GetBodyInstance()->SetInstanceSimulatePhysics(true);
 
@@ -47,9 +43,6 @@ void AC_FreezePickup::PickupResponse(AActor* actor)
 					if (mesh_->GetBodyInstance()->IsInstanceSimulatingPhysics())
 						mesh_->GetBodyInstance()->SetInstanceSimulatePhysics(false);
 
-					// Use this for invisibility.
-					//mesh_->SetVisibility(false);
-
 					picked_up_ = true;
 
 					// Enable player input after a set time.
@@ -65,19 +58,4 @@ void AC_FreezePickup::PickupDestroy()
 	// We could have something extra like a particle effect or something?
 	// Destroy this pickup.
 	Super::Destroy();
-}
-
-void AC_FreezePickup::Tick(float DeltaTime)
-{
-	if (picked_up_)
-	{
-		// This only slows the player down.
-		// Use this for slow motion pickup.
-		//mesh_->SetPhysicsLinearVelocity(FVector::ZeroVector);
-		//mesh_->SetPhysicsAngularVelocity(FVector::ZeroVector);
-
-		// If the body is dynamic.
-		// Make the body static.
-		
-	}
 }

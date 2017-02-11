@@ -12,10 +12,6 @@ UCLASS()
 class AMAZABALLZ_API AC_FreezePickup : public AC_BasePickup
 {
 	GENERATED_BODY()
-	
-	public:
-		// Called every frame
-		virtual void Tick(float DeltaSeconds) override;
 
 	protected:
 		// Methods.
