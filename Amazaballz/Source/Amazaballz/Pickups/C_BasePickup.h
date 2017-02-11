@@ -43,6 +43,7 @@ public:
 
 protected:
 	const FName player_tag_;
+	APlayerController* player_controller_;
 
 	UPROPERTY(EditAnywhere, Category = "Pickup Properties")	// Allow this attribute to be edited anywhere within Unreal 4 under the heading Pickup Properties.
 		bool destroyed_after_use_;							// If the pickup will be destroyed after it has been used.
