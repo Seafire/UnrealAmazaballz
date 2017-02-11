@@ -22,11 +22,13 @@ class AMAZABALLZ_API AC_BaseObstacle : public AActor
 		virtual void Tick( float DeltaSeconds ) override;
 
 	protected:
+		// Attributes.
 		const FName player_tag_;
 		APlayerController* player_controller_ = nullptr;
 		UStaticMeshComponent* mesh_ = nullptr;
 		bool entered_;
 
+		// Methods.
 		UPROPERTY(EditAnywhere, Category = "Obstacle Properties")	// If this obstacle will be destroyed after a player interacts with it.
 			bool destroyed_after_use_;							
 
