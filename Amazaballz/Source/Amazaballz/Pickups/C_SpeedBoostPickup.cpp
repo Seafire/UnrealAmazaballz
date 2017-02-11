@@ -7,7 +7,7 @@ void AC_SpeedBoostPickup::PickupResponse(AActor* actor)
 {
 	// Accessing the static mesh component of the character.
 	UStaticMeshComponent* mesh = actor->FindComponentByClass<UStaticMeshComponent>();
-
+	
 	// If the mesh exists.
 	if (mesh)
 	{
@@ -17,6 +17,9 @@ void AC_SpeedBoostPickup::PickupResponse(AActor* actor)
 
 		// Increase the speed of the character.
 		mesh->SetPhysicsLinearVelocity(new_velocity);
+
+		if (destroyed_after_use_)
+			PickupDestroy();
 	}
 }
 

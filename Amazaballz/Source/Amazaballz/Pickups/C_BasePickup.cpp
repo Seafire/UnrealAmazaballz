@@ -4,7 +4,8 @@
 #include "C_BasePickup.h"
 
 // Sets default values
-AC_BasePickup::AC_BasePickup()
+AC_BasePickup::AC_BasePickup() :
+	player_tag_("Player")
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;

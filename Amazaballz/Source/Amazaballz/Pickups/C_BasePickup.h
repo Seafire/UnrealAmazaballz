@@ -42,6 +42,11 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
 protected:
+	const FName player_tag_;
+
+	UPROPERTY(EditAnywhere, Category = "Pickup Properties")	// Allow this attribute to be edited anywhere within Unreal 4 under the heading Pickup Properties.
+		bool destroyed_after_use_;							// If the pickup will be destroyed after it has been used.
+
 	UFUNCTION(BlueprintCallable, Category = "Pickups")
 		virtual void PickupResponse(AActor* actor) PURE_VIRTUAL(AC_BasePickup::PickupResponse(AActor* actor), );
 

@@ -1,8 +1,8 @@
 {
 	"Changelist" : 3039270,
-	"BuildId" : "eafb2796-8d99-4f10-9046-be1735afad55",
+	"BuildId" : "059dc643-a023-41ee-abdf-81a7595db31a",
 	"Modules" : 
 	{
-		"Amazaballz" : "UE4Editor-Amazaballz-3238.dll"
+		"Amazaballz" : "UE4Editor-Amazaballz-3011.dll"
 	}
 }
