@@ -25,6 +25,20 @@
 
 using namespace std;
 
+UENUM(BlueprintType)
+namespace E_AffectedCharacters
+{
+	enum Type
+	{
+		AF_INTERACTING_PLAYER			UMETA(DisplayName = "Interacting Player"),
+		AF_ALL_PLAYERS					UMETA(DisplayName = "All Players"),
+		AF_ALL_NON_INTERACTING_PLAYERS	UMETA(DisplayName = "All Non Interacting Players"),
+		AF_ALLY_TEAM					UMETA(DisplayName = "Ally Players"),
+		AF_ENEMY_TEAM					UMETA(DisplayName = "Enemy Players"),
+		AF_ALL_ENEMY_CHARACTERS			UMETA(DisplayName = "All Enemy Characters")
+	};
+}
+
 UCLASS(abstract)
 class AMAZABALLZ_API AC_BasePickup : public AActor
 {
@@ -45,13 +59,16 @@ protected:
 	const FName player_tag_;
 	APlayerController* player_controller_;
 
-	UPROPERTY(EditAnywhere, Category = "Pickup Properties")	// Allow this attribute to be edited anywhere within Unreal 4 under the heading Pickup Properties.
-		bool destroyed_after_use_;							// If the pickup will be destroyed after it has been used.
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pickup Properties")		// Who will be affected by this pickup?
+		TEnumAsByte<E_AffectedCharacters::Type> affected_characters_;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pickup Properties")		// Will the pickup be destroyed after the first use?
+		bool destroyed_after_use_;							
 
 	UFUNCTION(BlueprintCallable, Category = "Pickups")
 		virtual void PickupResponse(AActor* actor) PURE_VIRTUAL(AC_BasePickup::PickupResponse(AActor* actor), );
 
 	UFUNCTION(BlueprintCallable, Category = "Pickups")
 		virtual void PickupDestroy() PURE_VIRTUAL(AC_BasePickup::PickupDestroy(), );
-	
+
 };

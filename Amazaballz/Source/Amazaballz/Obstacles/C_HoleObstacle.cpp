@@ -7,6 +7,8 @@ void AC_HoleObstacle::Respawn()
 {
 	mesh_->GetBodyInstance()->SetInstanceSimulatePhysics(true);
 	
+	// We just need the player to respawn here...
+	// The below spawn actor doesn't appear to work?
 	FRotator rot(0.0f, 0.0f, 0.0f);
 	player_controller_ = GetWorld()->SpawnActor<APlayerController>(APlayerController::StaticClass(), FVector::ZeroVector, rot);
 
