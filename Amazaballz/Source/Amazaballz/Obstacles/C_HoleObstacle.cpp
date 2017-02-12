@@ -5,12 +5,14 @@
 
 void AC_HoleObstacle::Respawn()
 {
-	mesh_->GetBodyInstance()->SetInstanceSimulatePhysics(true);
-	
-	// We just need the player to respawn here...
-	// The below spawn actor doesn't appear to work?
-	FRotator rot(0.0f, 0.0f, 0.0f);
-	player_controller_ = GetWorld()->SpawnActor<APlayerController>(APlayerController::StaticClass(), FVector::ZeroVector, rot);
+	FVector spawn_position(-1000.0f, -140.0f, 1000.0f);
+
+	// Teleport the player to the spawn position.
+	if (mesh_)
+	{
+		mesh_->GetBodyInstance()->SetInstanceSimulatePhysics(true);
+		mesh_->SetRelativeLocation(spawn_position);
+	}
 
 	if (destroyed_after_use_)
 		Super::Destroy();
@@ -21,8 +23,9 @@ void AC_HoleObstacle::ObstacleResponse(AActor* actor)
 	// Accessing the static mesh component of the character and checking if the actor is a player character.
 	bool is_player = actor->ActorHasTag(player_tag_);
 	UStaticMeshComponent* pickup_mesh_ = FindComponentByClass<UStaticMeshComponent>();
-	mesh_ = actor->FindComponentByClass<UStaticMeshComponent>();
-	player_controller_ = static_cast<APlayerController*>(actor);
+	AActor* temp_actor = actor;
+	mesh_ = temp_actor->FindComponentByClass<UStaticMeshComponent>();
+	player_controller_ = static_cast<APlayerController*>(temp_actor);
 
 	// If this actor is a player character.
 	if (is_player)
@@ -32,6 +35,8 @@ void AC_HoleObstacle::ObstacleResponse(AActor* actor)
 		{
 			if (player_controller_)
 			{
+				player_actor_ = temp_actor;
+
 				// Reset the speed of the player.
 				mesh_->SetPhysicsLinearVelocity(FVector::ZeroVector);
 

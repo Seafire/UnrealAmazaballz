@@ -25,6 +25,7 @@ class AMAZABALLZ_API AC_HoleObstacle : public AC_BaseObstacle
 
 	private:
 		FTimerHandle unused_handle_;
+		AActor* player_actor_;
 
 		// Methods.
 		void Respawn();
