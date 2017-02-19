@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Hilltown Games (C).
 
 #pragma once
 
@@ -15,7 +15,7 @@ class AMAZABALLZ_API AC_HoleObstacle : public AC_BaseObstacle
 
 	protected:
 		// Methods.
-		// Overriding base pickup methods.
+		// Overriding base obstacle methods.
 		virtual void ObstacleResponse(AActor* actor) override;
 		virtual void ObstacleLeft() override;
 

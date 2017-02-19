@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Hilltown Games (C).
 
 #pragma once
 
@@ -19,12 +19,12 @@ class AMAZABALLZ_API AC_PitObstacle : public AC_BaseObstacle
 
 	protected:
 		// Methods.
-		// Overriding base pickup methods.
+		// Overriding base obstacle methods.
 		virtual void ObstacleResponse(AActor* actor) override;
 		virtual void ObstacleLeft() override;
 
 	private:
 		// Attributes.
-		UPROPERTY(EditAnywhere, Category = "Obstacle Properties", meta = (ClampMin = "0.0", ClampMax = "1.0", UIMin = "0.0", UIMax = "1.0"))	// How fast the player will move when they interact with this obstacle?
+		UPROPERTY(EditAnywhere, Category = "Obstacle Properties", meta = (ClampMin = "0.0", ClampMax = "1.0", UIMin = "0.0", UIMax = "1.0"))	// How fast the player will move when they interact with this obstacle? 0 = slow, 1 = normal speed.
 			float speed_multiplier_;
 };
