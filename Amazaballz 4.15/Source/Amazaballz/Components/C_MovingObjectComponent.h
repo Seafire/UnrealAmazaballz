@@ -9,7 +9,8 @@
  * Base Class:	UActorComponent
  * Author(s):	Conor Paterson and Jason Mottershead
  * 
- * Purpose:		To provide any standard game object with an easy to use and plot waypoint system with adjustable speed.
+ * Purpose:		The moving object component will allow any actor to move along predefined
+ *				waypoints at variable speed.
  */
 
 #pragma once
@@ -18,10 +19,6 @@
 #include "Components/ActorComponent.h"
 #include "C_MovingObjectComponent.generated.h"
 
-/*
- * The moving object component will allow any actor to move along predefined
- * waypoints at variable speed.
- */
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class AMAZABALLZ_API UC_MovingObjectComponent : public UActorComponent
 {

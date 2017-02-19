@@ -16,7 +16,7 @@ UC_MovingObjectComponent::UC_MovingObjectComponent()
 }
 
 /*
- * Called when the game starts.
+ * Called when the game starts or when spawned.
  */
 void UC_MovingObjectComponent::BeginPlay()
 {
