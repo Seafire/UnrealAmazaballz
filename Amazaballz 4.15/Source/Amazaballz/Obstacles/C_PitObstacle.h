@@ -21,7 +21,7 @@ class AMAZABALLZ_API AC_PitObstacle : public AC_BaseObstacle
 		// Methods.
 		// Overriding base obstacle methods.
 		virtual void ObstacleResponse(AActor* actor) override;
-		virtual void ObstacleLeft() override;
+		virtual void ObstacleLeft(AActor* actor) override;
 
 	private:
 		// Attributes.

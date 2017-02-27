@@ -44,6 +44,12 @@ class AMAZABALLZ_API AC_Player : public ACharacter
 		UFUNCTION(BlueprintCallable, Category = "Player")
 			void SetIsJumping(const bool value);
 
+		UFUNCTION(BlueprintCallable, Category = "Player")
+			void SetIndex(const int value);
+
+		UFUNCTION(BlueprintCallable, Category = "Player")
+			int& GetIndex();
+
 		// Getters/Setters.
 		inline float& get_roll_torque() { return roll_torque_; }
 		inline bool& get_is_jumping()	{ return is_jumping_; }
@@ -55,6 +61,9 @@ class AMAZABALLZ_API AC_Player : public ACharacter
 
 		UPROPERTY(EditAnywhere, Category = "Player Properties")		// How much will the player jump up? NOTE: This also needs to be really high.
 			float jump_impulse = 400000.0f;
+
+		UPROPERTY(EditAnywhere, Category = "Player Properties")		// What player is this?
+			int index_ = 0;
 
 		UStaticMeshComponent* mesh_ = nullptr;
 		bool is_jumping_;
