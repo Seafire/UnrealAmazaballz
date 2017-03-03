@@ -25,33 +25,27 @@ void AC_MirrorPickup::PickupResponse(AActor* actor)
 	// If this actor is a player character.
 	if (is_player)
 	{
+		AC_Player* player = Cast<AC_Player>(actor);
+
 		// If the mesh exists.
 		if (mesh_)
 		{
-			// We would need to loop through all of the other players.
-			// Checking to see if they are not equal to this player.
-			// And then disable their input, and UnFreeze them after a timer.
-			if (player_controller_)
+			if (!picked_up_ && player->get_can_use_pickups())
 			{
-				AC_Player* player = Cast<AC_Player>(actor);
-
-				if (!picked_up_)
-				{
-					// Mirror logic here.
-					// The player should no longer be able to be attacked from other players.
-					player->set_can_be_attacked(false);
-					picked_up_ = true;
+				// Mirror logic here.
+				// The player should no longer be able to be attacked from other players.
+				player->set_can_be_attacked(false);
+				picked_up_ = true;
 					
-					// Enable player input after a set time.
-					GetWorldTimerManager().SetTimer(unused_handle_, this, &AC_MirrorPickup::RemoveMirror, mirror_timer_, false);
+				// Enable player input after a set time.
+				GetWorldTimerManager().SetTimer(unused_handle_, this, &AC_MirrorPickup::RemoveMirror, mirror_timer_, false);
 
-					// This should hopefully fix the multiple collisions messing up the timer response.
-					// Need to test this out at Conor's.
-					if (pickup_mesh_ && destroyed_after_use_)
-					{
-						pickup_mesh_->SetVisibility(false);
-						pickup_mesh_->DestroyComponent();
-					}
+				// This should hopefully fix the multiple collisions messing up the timer response.
+				// Need to test this out at Conor's.
+				if (pickup_mesh_ && destroyed_after_use_)
+				{
+					pickup_mesh_->SetVisibility(false);
+					pickup_mesh_->DestroyComponent();
 				}
 			}
 		}

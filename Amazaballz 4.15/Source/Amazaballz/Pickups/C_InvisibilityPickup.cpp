@@ -22,10 +22,12 @@ void AC_InvisibilityPickup::PickupResponse(AActor* actor)
 	// If this actor is a player character.
 	if (is_player)
 	{
+		AC_Player* player = Cast<AC_Player>(actor);
+
 		// If the mesh exists.
 		if (mesh_)
 		{
-			if (!picked_up_)
+			if (!picked_up_ && player->get_can_use_pickups())
 			{
 				mesh_->SetVisibility(false);
 				picked_up_ = true;

@@ -3,7 +3,6 @@
 #pragma once
 
 #include "Pickups/C_BasePickup.h"
-#include "Characters/C_Player.h"
 #include "C_MirrorPickup.generated.h"
 
 /**

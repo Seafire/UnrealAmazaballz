@@ -22,29 +22,27 @@ void AC_SpeedsterPickup::PickupResponse(AActor* actor)
 	// If this actor is a player character.
 	if (is_player)
 	{
+		AC_Player* player = Cast<AC_Player>(actor);
+
 		// If the mesh exists.
 		if (mesh_)
 		{
-			// We should check to see if the pickup affects just the player, all players, the enemy team, or just the ally team.
-			if (player_controller_)
-			{
-				if (!picked_up_)
-				{			
-					picked_up_ = true;
+			if (!picked_up_ && player->get_can_use_pickups())
+			{			
+				picked_up_ = true;
 
-					if(!(speedster_factor_ < 1.0f))
-						mesh_->SetPhysicsLinearVelocity(mesh_->GetPhysicsLinearVelocity() * speedster_factor_);
+				if(!(speedster_factor_ < 1.0f))
+					mesh_->SetPhysicsLinearVelocity(mesh_->GetPhysicsLinearVelocity() * speedster_factor_);
 
-					// Enable player input after a set time.
-					GetWorldTimerManager().SetTimer(unused_handle_, this, &AC_SpeedsterPickup::NormalSpeed, speedster_timer_, false);
+				// Enable player input after a set time.
+				GetWorldTimerManager().SetTimer(unused_handle_, this, &AC_SpeedsterPickup::NormalSpeed, speedster_timer_, false);
 
-					// This should hopefully fix the multiple collisions messing up the freeze pickup timer response.
-					// Need to test this out at Conor's.
-					if (pickup_mesh_ && destroyed_after_use_)
-					{
-						pickup_mesh_->SetVisibility(false);
-						pickup_mesh_->DestroyComponent();
-					}
+				// This should hopefully fix the multiple collisions messing up the freeze pickup timer response.
+				// Need to test this out at Conor's.
+				if (pickup_mesh_ && destroyed_after_use_)
+				{
+					pickup_mesh_->SetVisibility(false);
+					pickup_mesh_->DestroyComponent();
 				}
 			}
 		}

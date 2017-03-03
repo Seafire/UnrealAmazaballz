@@ -19,8 +19,10 @@
 #pragma once
 
 // Includes here.
-#include <iostream>
 #include "GameFramework/Actor.h"
+#include <iostream>
+#include <vector>
+#include "Characters/C_Player.h"
 #include "C_BasePickup.generated.h"
 
 using namespace std;
@@ -63,7 +65,7 @@ protected:
 		TEnumAsByte<E_AffectedCharacters::Type> affected_characters_;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pickup Properties")		// Will the pickup be destroyed after the first use?
-		bool destroyed_after_use_;							
+		bool destroyed_after_use_ = true;							
 
 	UFUNCTION(BlueprintCallable, Category = "Pickups")
 		virtual void PickupResponse(AActor* actor) PURE_VIRTUAL(AC_BasePickup::PickupResponse(AActor* actor), );

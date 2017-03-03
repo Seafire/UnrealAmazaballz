@@ -76,8 +76,11 @@ class AMAZABALLZ_API AC_Player : public ACharacter
 		inline bool& get_is_jumping()						{ return is_jumping_; }
 		inline bool& get_is_spawning()						{ return should_respawn_; }
 		inline bool& get_can_be_attacked()					{ return can_be_attacked_; }
+		inline bool& get_can_use_pickups()					{ return can_use_pickups_; }
+
 		inline void set_is_spawning(const bool value)		{ should_respawn_ = value; }
 		inline void set_can_be_attacked(const bool value)	{ can_be_attacked_ = value; }
+		inline void set_can_use_pickups(const bool value)	{ can_use_pickups_ = value;  }
 
 	private:
 		// Attributes.
@@ -99,6 +102,7 @@ class AMAZABALLZ_API AC_Player : public ACharacter
 		UStaticMeshComponent* mesh_ = nullptr;
 		bool is_jumping_ = false;
 		bool can_be_attacked_ = true;
+		bool can_use_pickups_ = true;
 		bool should_respawn_ = false;
 		FVector spawn_position_;
 

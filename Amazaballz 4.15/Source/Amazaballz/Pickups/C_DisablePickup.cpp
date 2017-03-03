@@ -8,7 +8,7 @@ void AC_DisablePickup::EnablePickups()
 	picked_up_ = false;
 
 	// Enable other player pickups after use.
-	//
+	//player->set_can_use_pickups(true);
 
 	if (destroyed_after_use_)
 		PickupDestroy();
@@ -21,10 +21,12 @@ void AC_DisablePickup::PickupResponse(AActor* actor)
 	UStaticMeshComponent* pickup_mesh_ = FindComponentByClass<UStaticMeshComponent>();
 	mesh_ = actor->FindComponentByClass<UStaticMeshComponent>();
 	player_controller_ = static_cast<APlayerController*>(actor);
-
+	
 	// If this actor is a player character.
 	if (is_player)
 	{
+		AC_Player* player = Cast<AC_Player>(actor);
+
 		// If the mesh exists.
 		if (mesh_)
 		{
@@ -33,12 +35,12 @@ void AC_DisablePickup::PickupResponse(AActor* actor)
 			// And then disable their input, and UnFreeze them after a timer.
 			if (player_controller_)
 			{
-				if (!picked_up_)
+				if (!picked_up_ && player->get_can_use_pickups())
 				{
-					// Disable other player pickup logic here.
-					// Perhaps change their tag to something else?
-					// Or change their collision channel to a channel that ignores pickups?
-
+					// Disable other player pickup logic here
+					// Need to loop through all of the players and use the below line.
+					//player->set_can_use_pickups(false);
+					
 					picked_up_ = true;
 
 					// Enable player pickups after a set time.
