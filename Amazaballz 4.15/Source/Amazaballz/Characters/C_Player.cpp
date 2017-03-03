@@ -88,3 +88,21 @@ void AC_Player::SetIsJumping(const bool value)
 {
 	is_jumping_ = value;
 }
+
+/*
+ * Sets the player index.
+ * @param value the index value for this player.
+ */
+void AC_Player::SetIndex(const int value)
+{
+	index_ = value;
+}
+
+/*
+ * Gets the current player index.
+ * @return int the index for this player.
+ */
+int& AC_Player::GetIndex()
+{
+	return index_;
+}

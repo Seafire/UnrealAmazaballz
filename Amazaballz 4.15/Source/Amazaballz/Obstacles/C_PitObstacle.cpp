@@ -16,6 +16,8 @@ void AC_PitObstacle::ObstacleResponse(AActor* actor)
 		if (mesh_)
 		{
 			entered_ = true;
+			AC_Player* player = Cast<AC_Player>(actor);
+			interacting_players_.push_back(player);
 
 			if (destroyed_after_use_)
 				Super::Destroy();
@@ -23,17 +25,42 @@ void AC_PitObstacle::ObstacleResponse(AActor* actor)
 	}
 }
 
-void AC_PitObstacle::ObstacleLeft()
+void AC_PitObstacle::ObstacleLeft(AActor* actor)
 {
-	// We could have something extra like a particle effect or something?
-	
+	bool is_player = actor->ActorHasTag(player_tag_);
+
+	if (is_player)
+	{
+		AC_Player* player = Cast<AC_Player>(actor);
+
+		// We could have something extra like a particle effect or something?
+		if (!interacting_players_.empty())
+		{
+			for (size_t i = 0; i < interacting_players_.size(); i++)
+			{
+				// If this player should be removed from the obstacle colliding player vector.
+				if (interacting_players_[i]->GetIndex() == player->GetIndex())
+				{
+					interacting_players_.erase(interacting_players_.begin() + i);
+				}
+			}
+		}
+	}
 	entered_ = false;
 }
 
 void AC_PitObstacle::Tick(float DeltaTime)
 {
-	if (entered_)
+	//if (entered_)
+	//{
+	//	mesh_->SetPhysicsLinearVelocity(mesh_->GetPhysicsLinearVelocity() * speed_multiplier_);
+	//}
+	if (!interacting_players_.empty())
 	{
-		mesh_->SetPhysicsLinearVelocity(mesh_->GetPhysicsLinearVelocity() * speed_multiplier_);
+		for (size_t i = 0; i < interacting_players_.size(); i++)
+		{
+			UStaticMeshComponent* temp_mesh = interacting_players_[i]->FindComponentByClass<UStaticMeshComponent>();
+			temp_mesh->SetPhysicsLinearVelocity(temp_mesh->GetPhysicsLinearVelocity() * speed_multiplier_);
+		}
 	}
 }

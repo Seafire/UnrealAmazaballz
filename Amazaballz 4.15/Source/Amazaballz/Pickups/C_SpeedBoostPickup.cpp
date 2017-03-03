@@ -8,6 +8,7 @@ void AC_SpeedBoostPickup::PickupResponse(AActor* actor)
 	// Accessing the static mesh component of the character and checking if the actor is a player character.
 	UStaticMeshComponent* mesh = actor->FindComponentByClass<UStaticMeshComponent>();
 	bool is_player = actor->ActorHasTag(player_tag_);
+	//C_Player player = actor->GetComponentByClass<C_Player>();
 
 	// If this actor is a player character.
 	if (is_player)
