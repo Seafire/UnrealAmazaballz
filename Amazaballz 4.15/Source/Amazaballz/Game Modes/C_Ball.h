@@ -19,12 +19,17 @@ class AMAZABALLZ_API AC_Ball : public AActor
 		virtual void BeginPlay() override;
 
 	public:	
-		UFUNCTION(BlueprintCallable, Category = "Ball")
+		UFUNCTION(BlueprintCallable, Category = "Ball Game Mode")
 			virtual void Respawn();
 
 		// Called every frame
 		virtual void Tick(float DeltaTime) override;
 
+	protected:
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ball Properties")		// What team this net belongs to.
+			AActor* spawn_point_;
+
 	private:
 		FVector spawn_position_;
+		UStaticMeshComponent* mesh_;
 };

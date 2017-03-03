@@ -14,7 +14,8 @@ AC_Ball::AC_Ball()
 void AC_Ball::BeginPlay()
 {
 	Super::BeginPlay();
-	spawn_position_ = Super::GetActorLocation();
+	mesh_ = FindComponentByClass<UStaticMeshComponent>();
+	spawn_position_ = spawn_point_->GetActorLocation();
 }
 
 /*
@@ -22,7 +23,9 @@ void AC_Ball::BeginPlay()
  */
 void AC_Ball::Respawn()
 {
-	Super::SetActorLocation(spawn_position_);
+	//Super::SetActorLocation(spawn_position_);
+	mesh_->SetPhysicsLinearVelocity(FVector::ZeroVector);
+	SetActorLocation(spawn_position_);
 }
 
 // Called every frame
