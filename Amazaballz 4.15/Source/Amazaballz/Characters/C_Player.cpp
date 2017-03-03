@@ -9,7 +9,8 @@
 AC_Player::AC_Player() :
 	is_jumping_(false),
 	should_respawn_(false),
-	has_infinite_lives_(false)
+	has_infinite_lives_(false),
+	can_be_attacked_(true)
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;

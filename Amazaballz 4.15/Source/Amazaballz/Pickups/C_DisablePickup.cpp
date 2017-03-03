@@ -35,15 +35,6 @@ void AC_DisablePickup::PickupResponse(AActor* actor)
 			{
 				if (!picked_up_)
 				{
-					//// Reset the speed of the player.
-					//mesh_->SetPhysicsLinearVelocity(FVector::ZeroVector);
-
-					//if (pickup_mesh_ && destroyed_after_use_)
-					//	pickup_mesh_->SetVisibility(false);
-
-					//if (mesh_->GetBodyInstance()->IsInstanceSimulatingPhysics())
-					//	mesh_->GetBodyInstance()->SetInstanceSimulatePhysics(false);
-
 					// Disable other player pickup logic here.
 					// Perhaps change their tag to something else?
 					// Or change their collision channel to a channel that ignores pickups?
@@ -52,6 +43,14 @@ void AC_DisablePickup::PickupResponse(AActor* actor)
 
 					// Enable player pickups after a set time.
 					GetWorldTimerManager().SetTimer(unused_handle_, this, &AC_DisablePickup::EnablePickups, disable_timer_, false);
+
+					// This should hopefully fix the multiple collisions messing up the timer response.
+					// Need to test this out at Conor's.
+					if (pickup_mesh_ && destroyed_after_use_)
+					{
+						pickup_mesh_->SetVisibility(false);
+						pickup_mesh_->DestroyComponent();
+					}
 				}
 			}
 		}

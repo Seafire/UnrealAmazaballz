@@ -37,9 +37,6 @@ void AC_FreezePickup::PickupResponse(AActor* actor)
 					// Reset the speed of the player.
 					mesh_->SetPhysicsLinearVelocity(FVector::ZeroVector);
 
-					if(pickup_mesh_ && destroyed_after_use_)
-						pickup_mesh_->SetVisibility(false);
-
 					if (mesh_->GetBodyInstance()->IsInstanceSimulatingPhysics())
 						mesh_->GetBodyInstance()->SetInstanceSimulatePhysics(false);
 
@@ -50,6 +47,14 @@ void AC_FreezePickup::PickupResponse(AActor* actor)
 
 					// Enable player input after a set time.
 					GetWorldTimerManager().SetTimer(unused_handle_, this, &AC_FreezePickup::UnFreeze, freeze_timer_, false);
+
+					// This should hopefully fix the multiple collisions messing up the freeze pickup timer response.
+					// Need to test this out at Conor's.
+					if (pickup_mesh_ && destroyed_after_use_)
+					{
+						pickup_mesh_->SetVisibility(false);
+						pickup_mesh_->DestroyComponent();
+					}
 				}
 			}
 		}

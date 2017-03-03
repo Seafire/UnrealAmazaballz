@@ -72,10 +72,12 @@ class AMAZABALLZ_API AC_Player : public ACharacter
 			bool& HasInfiniteLives();
 
 		// Getters/Setters.
-		inline float& get_roll_torque()					{ return roll_torque_; }
-		inline bool& get_is_jumping()					{ return is_jumping_; }
-		inline bool& get_is_spawning()					{ return should_respawn_; }
-		inline void set_is_spawning(const bool value)	{ should_respawn_ = value; }
+		inline float& get_roll_torque()						{ return roll_torque_; }
+		inline bool& get_is_jumping()						{ return is_jumping_; }
+		inline bool& get_is_spawning()						{ return should_respawn_; }
+		inline bool& get_can_be_attacked()					{ return can_be_attacked_; }
+		inline void set_is_spawning(const bool value)		{ should_respawn_ = value; }
+		inline void set_can_be_attacked(const bool value)	{ can_be_attacked_ = value; }
 
 	private:
 		// Attributes.
@@ -95,8 +97,9 @@ class AMAZABALLZ_API AC_Player : public ACharacter
 			int lives_ = 3;
 
 		UStaticMeshComponent* mesh_ = nullptr;
-		bool is_jumping_;
-		bool should_respawn_;
+		bool is_jumping_ = false;
+		bool can_be_attacked_ = true;
+		bool should_respawn_ = false;
 		FVector spawn_position_;
 
 		// Getters/Setters.

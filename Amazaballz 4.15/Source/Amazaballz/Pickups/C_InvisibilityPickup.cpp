@@ -27,14 +27,19 @@ void AC_InvisibilityPickup::PickupResponse(AActor* actor)
 		{
 			if (!picked_up_)
 			{
-				if (pickup_mesh_ && destroyed_after_use_)
-					pickup_mesh_->SetVisibility(false);
-
 				mesh_->SetVisibility(false);
 				picked_up_ = true;
 
 				// Make the player visibile after a set time.
 				GetWorldTimerManager().SetTimer(unused_handle_, this, &AC_InvisibilityPickup::Visibility, invisibility_timer_, false);
+
+				// This should hopefully fix the multiple collisions messing up the timer response.
+				// Need to test this out at Conor's.
+				if (pickup_mesh_ && destroyed_after_use_)
+				{
+					pickup_mesh_->SetVisibility(false);
+					pickup_mesh_->DestroyComponent();
+				}
 			}
 		}
 	}
