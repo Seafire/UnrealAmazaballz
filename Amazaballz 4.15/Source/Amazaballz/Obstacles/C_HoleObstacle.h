@@ -30,5 +30,5 @@ class AMAZABALLZ_API AC_HoleObstacle : public AC_BaseObstacle
 
 		// Methods.
 		//UFUNCTION()
-		void Respawn(UStaticMeshComponent* mesh);
+		void Respawn();
 };

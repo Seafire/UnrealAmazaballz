@@ -7,10 +7,12 @@
  * Sets the default values.
  */
 AC_Player::AC_Player() :
-	is_jumping_(false)
+	is_jumping_(false),
+	should_respawn_(false)
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	spawn_position_.Set(-1000.0f, -140.0f, 1000.0f);
 }
 
 /*
@@ -81,6 +83,30 @@ void AC_Player::Jump()
 }
 
 /*
+ * Used to respawn the player in their respawn position.
+ */
+void AC_Player::Respawn()
+{
+	if (should_respawn_)
+	{
+		if (mesh_)
+		{
+			// If the player still has lives, respawn them.
+			if ((lives_ + 1) > 0)
+			{
+				// Teleport the player to the spawn position.
+				mesh_->GetBodyInstance()->SetInstanceSimulatePhysics(true);
+				mesh_->SetRelativeLocation(spawn_position_);
+				should_respawn_ = false;
+			}
+			// Otherwise, the player has no lives left.
+			else
+				Super::Destroy();
+		}
+	}
+}
+
+/*
  * Sets the jumping flag for the player.
  * @param value if the player is jumping or not.
  */
@@ -99,10 +125,46 @@ void AC_Player::SetIndex(const int value)
 }
 
 /*
+ * Sets the lives that the player has.
+ * @param value the number of lives to set for this player.
+ */
+void AC_Player::SetLives(const int value)
+{
+	lives_ = value;
+}
+
+/*
+ * Sets what the current spawn position is.
+ * @param value the new spawn position for this player.
+ */
+void AC_Player::SetSpawnPosition(const FVector value)
+{
+	spawn_position_ = value;
+}
+
+/*
  * Gets the current player index.
  * @return int the index for this player.
  */
 int& AC_Player::GetIndex()
 {
 	return index_;
+}
+
+/*
+ * Gets the amount of lives this player has.
+ * @return int the amount of lives for this player.
+ */
+int& AC_Player::GetLives()
+{
+	return lives_;
+}
+
+/*
+ * Gets the current spawn position of the player.
+ * @return FVector the current spawn position.
+ */
+FVector& AC_Player::GetSpawnPosition()
+{
+	return spawn_position_;
 }

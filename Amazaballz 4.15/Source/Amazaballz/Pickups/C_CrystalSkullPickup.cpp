@@ -8,8 +8,8 @@ void AC_CrystalSkullPickup::PickupResponse(AActor* actor)
 	// Accessing the static mesh component of the character and checking if the actor is a player character.
 	UStaticMeshComponent* mesh = actor->FindComponentByClass<UStaticMeshComponent>();
 	bool is_player = actor->ActorHasTag(player_tag_);
-	//AC_Player player = actor->GetComponentByClass<AC_Player>();
-
+	AC_Player* player = Cast<AC_Player>(actor);
+	
 	// If this actor is a player character.
 	if (is_player)
 	{
@@ -18,7 +18,7 @@ void AC_CrystalSkullPickup::PickupResponse(AActor* actor)
 		{
 			// Crystal Skull pickup logic here.
 			// Add a life onto the current player.
-			// player->SetLives(player->GetLives() + 1);
+			player->SetLives(player->GetLives() + 1);
 
 			if (destroyed_after_use_)
 				PickupDestroy();

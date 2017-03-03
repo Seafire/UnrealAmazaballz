@@ -42,17 +42,35 @@ class AMAZABALLZ_API AC_Player : public ACharacter
 			virtual void Jump();
 
 		UFUNCTION(BlueprintCallable, Category = "Player")
+			virtual void Respawn();
+
+		UFUNCTION(BlueprintCallable, Category = "Player")
 			void SetIsJumping(const bool value);
 
 		UFUNCTION(BlueprintCallable, Category = "Player")
 			void SetIndex(const int value);
 
 		UFUNCTION(BlueprintCallable, Category = "Player")
+			void SetLives(const int value);
+
+		UFUNCTION(BlueprintCallable, Category = "Player")
+			void SetSpawnPosition(const FVector value);
+
+		UFUNCTION(BlueprintCallable, Category = "Player")
 			int& GetIndex();
+
+		UFUNCTION(BlueprintCallable, Category = "Player")
+			int& GetLives();
+
+		UFUNCTION(BlueprintCallable, Category = "Player")
+			FVector& GetSpawnPosition();
 
 		// Getters/Setters.
 		inline float& get_roll_torque() { return roll_torque_; }
 		inline bool& get_is_jumping()	{ return is_jumping_; }
+		inline bool& get_is_spawning()	{ return should_respawn_; }
+
+		inline void set_is_spawning(const bool value) { should_respawn_ = value; }
 
 	private:
 		// Attributes.
@@ -65,8 +83,13 @@ class AMAZABALLZ_API AC_Player : public ACharacter
 		UPROPERTY(EditAnywhere, Category = "Player Properties")		// What player is this?
 			int index_ = 0;
 
+		UPROPERTY(EditAnywhere, Category = "Player Properties")		// How many lives does this player have?
+			int lives_ = 3;
+
 		UStaticMeshComponent* mesh_ = nullptr;
 		bool is_jumping_;
+		bool should_respawn_;
+		FVector spawn_position_;
 
 		// Getters/Setters.
 		// This will allow us to check if the player is simulating physics or not.
