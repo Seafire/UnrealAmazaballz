@@ -16,9 +16,9 @@ void AC_CrystalSkullPickup::PickupResponse(AActor* actor)
 		// If the mesh exists.
 		if (mesh)
 		{
-			// Crystal Skull pickup logic here.
-			// Add a life onto the current player.
-			player->SetLives(player->GetLives() + 1);
+			// Crystal skull logic.
+			if(!player->HasInfiniteLives())
+				player->SetLives(player->GetLives() + 1);
 
 			if (destroyed_after_use_)
 				PickupDestroy();

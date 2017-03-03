@@ -32,7 +32,10 @@ void AC_HoleObstacle::ObstacleResponse(AActor* actor)
 		{
 			AC_Player* player = Cast<AC_Player>(actor);
 			player->set_is_spawning(true);
-			player->SetLives(player->GetLives() - 1);
+
+			if(!player->HasInfiniteLives())
+				player->SetLives(player->GetLives() - 1);
+
 			interacting_players_.push_back(player);
 		}
 	}

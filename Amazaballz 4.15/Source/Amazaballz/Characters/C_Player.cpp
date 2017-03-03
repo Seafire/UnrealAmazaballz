@@ -8,7 +8,8 @@
  */
 AC_Player::AC_Player() :
 	is_jumping_(false),
-	should_respawn_(false)
+	should_respawn_(false),
+	has_infinite_lives_(false)
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -87,21 +88,33 @@ void AC_Player::Jump()
  */
 void AC_Player::Respawn()
 {
-	if (should_respawn_)
+	// If this player should be able to just constantly respawn back into the game.
+	if (has_infinite_lives_)
 	{
-		if (mesh_)
+		// Teleport the player to the spawn position.
+		mesh_->GetBodyInstance()->SetInstanceSimulatePhysics(true);
+		mesh_->SetRelativeLocation(spawn_position_);
+		should_respawn_ = false;
+	}
+	// Otherwise, the player has a limited amount of lives.
+	else
+	{
+		if (should_respawn_)
 		{
-			// If the player still has lives, respawn them.
-			if ((lives_ + 1) > 0)
+			if (mesh_)
 			{
-				// Teleport the player to the spawn position.
-				mesh_->GetBodyInstance()->SetInstanceSimulatePhysics(true);
-				mesh_->SetRelativeLocation(spawn_position_);
-				should_respawn_ = false;
+				// If the player still has lives, respawn them.
+				if ((lives_ + 1) > 0)
+				{
+					// Teleport the player to the spawn position.
+					mesh_->GetBodyInstance()->SetInstanceSimulatePhysics(true);
+					mesh_->SetRelativeLocation(spawn_position_);
+					should_respawn_ = false;
+				}
+				// Otherwise, the player has no lives left.
+				else
+					Super::Destroy();
 			}
-			// Otherwise, the player has no lives left.
-			else
-				Super::Destroy();
 		}
 	}
 }
@@ -143,6 +156,15 @@ void AC_Player::SetSpawnPosition(const FVector value)
 }
 
 /*
+ * Sets the current mortality status of the player.
+ * @param value if this player should have infinite lives.
+ */
+void AC_Player::SetInfiniteLives(const bool value)
+{
+	has_infinite_lives_ = value;
+}
+
+/*
  * Gets the current player index.
  * @return int the index for this player.
  */
@@ -167,4 +189,13 @@ int& AC_Player::GetLives()
 FVector& AC_Player::GetSpawnPosition()
 {
 	return spawn_position_;
+}
+
+/*
+ * Sets the constant spawning flag for the player.
+ * @param value if the player should have infinite lives essentially.
+ */
+bool & AC_Player::HasInfiniteLives()
+{
+	return has_infinite_lives_;
 }
