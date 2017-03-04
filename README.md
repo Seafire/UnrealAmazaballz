@@ -39,7 +39,7 @@ Please follow the naming conventions as closely as possible:
 	
 4. Comment at the top of a file if you've worked in it using the block comment headers:
 
-    ...
+    ```
 	/*
 	 * Class Name
 	 * ==========
@@ -51,7 +51,7 @@ Please follow the naming conventions as closely as possible:
 	 *
 	 * Purpose: The purpose of this file.
 	 */
-    ...
+    ```
 	
 5. Use block commenting (/* */) for summaries on objects. Follow this specific commenting convention for methods:
 
