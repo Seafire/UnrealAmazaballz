@@ -3,8 +3,9 @@
 #include "Amazaballz.h"
 #include "C_Net.h"
 
-
-// Sets default values
+/*
+ * Sets the default values.
+ */
 AC_Net::AC_Net() :
 	ball_tag_("Ball"),
 	player_tag_("Player")
@@ -13,7 +14,9 @@ AC_Net::AC_Net() :
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-// Called when the game starts or when spawned
+/*
+ * Called when the game starts or when spawned.
+ */
 void AC_Net::BeginPlay()
 {
 	Super::BeginPlay();	
@@ -21,9 +24,11 @@ void AC_Net::BeginPlay()
 
 /*
  * This will provide a response for what happens when this net is being interacted with.
+ * @param actor the actor that is interacting with this net.
  */
 void AC_Net::NetResponse(AActor* actor)
 {
+	// If the actor is a player, respawn them.
 	if (actor->ActorHasTag(player_tag_))
 	{
 		AC_Player* player = Cast<AC_Player>(actor);
@@ -31,6 +36,7 @@ void AC_Net::NetResponse(AActor* actor)
 		player->Respawn();
 	}
 	
+	// If the actor is a ball, score a goal and respawn.
 	if(actor->ActorHasTag(ball_tag_))
 	{
 		AC_Ball* ball = Cast<AC_Ball>(actor);
@@ -49,7 +55,10 @@ TEnumAsByte<E_Team::Type>& AC_Net::GetTeam()
 	return team_;
 }
 
-// Called every frame
+/*
+ * Called every frame.
+ * @param DeltaTime the time passed since the last frame update.
+ */
 void AC_Net::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

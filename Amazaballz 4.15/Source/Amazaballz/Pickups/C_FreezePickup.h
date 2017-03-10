@@ -1,26 +1,32 @@
 // Hilltown Games (C).
 
+/*
+ * Freeze Pickup
+ * =============
+ *
+ * Created:		2017/03/04 19:45
+ * Class Name:	AC_FreezePickup
+ * Base Class:	AC_BasePickup
+ * Author(s):	Jason Mottershead
+ *
+ * Purpose:		Provides more specific functionality for freeze pickup.
+ */
+
 #pragma once
 
 #include "Pickups/C_BasePickup.h"
 #include "C_FreezePickup.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class AMAZABALLZ_API AC_FreezePickup : public AC_BasePickup
 {
 	GENERATED_BODY()
 
 	protected:
-		// Methods.
-		// Overriding base pickup methods.
 		virtual void PickupResponse(AActor* actor) override;
 		virtual void PickupDestroy() override;
 
 	private:
-		// Attributes.
 		UPROPERTY(EditAnywhere, Category = "Pickup Properties")	// How long will all of the other players be frozen for?
 			float freeze_timer_;
 
@@ -28,6 +34,5 @@ class AMAZABALLZ_API AC_FreezePickup : public AC_BasePickup
 		FTimerHandle unused_handle_;
 		UStaticMeshComponent* mesh_ = nullptr;
 
-		// Methods.
 		void UnFreeze();
 };

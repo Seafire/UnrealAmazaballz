@@ -3,7 +3,9 @@
 #include "Amazaballz.h"
 #include "C_BasePickup.h"
 
-// Sets default values
+/*
+ * Sets the default values.
+ */
 AC_BasePickup::AC_BasePickup() :
 	player_tag_("Player"),
 	player_controller_(nullptr)
@@ -12,10 +14,15 @@ AC_BasePickup::AC_BasePickup() :
 	PrimaryActorTick.bCanEverTick = true;
 }
 
+/*
+ * Destructs this object.
+ */
 AC_BasePickup::~AC_BasePickup()
 {}
 
-// Called when the game starts or when spawned
+/*
+ * Called when the game starts or when spawned.
+ */
 void AC_BasePickup::BeginPlay()
 {
 	Super::BeginPlay();
@@ -31,7 +38,10 @@ void AC_BasePickup::BeginPlay()
 	*/
 }
 
-// Called every frame
+/*
+ * Called every frame.
+ * @param DeltaTime the time passed since the last frame update.
+ */
 void AC_BasePickup::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );

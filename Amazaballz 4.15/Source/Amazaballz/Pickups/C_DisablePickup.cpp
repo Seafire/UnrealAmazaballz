@@ -3,6 +3,10 @@
 #include "Amazaballz.h"
 #include "C_DisablePickup.h"
 
+/*
+ * Used when this pickup should restore the player's ability
+ * to use pickups again.
+ */
 void AC_DisablePickup::EnablePickups()
 {
 	picked_up_ = false;
@@ -14,6 +18,10 @@ void AC_DisablePickup::EnablePickups()
 		PickupDestroy();
 }
 
+/*
+ * Provides a standard response for colliding with this pickup.
+ * @param actor the actor that is colliding with this game object.
+ */
 void AC_DisablePickup::PickupResponse(AActor* actor)
 {
 	// Accessing the static mesh component of the character and checking if the actor is a player character.
@@ -59,6 +67,9 @@ void AC_DisablePickup::PickupResponse(AActor* actor)
 	}
 }
 
+/*
+ * Defines what happens when we destroy this item.
+ */
 void AC_DisablePickup::PickupDestroy()
 {
 	// We could have something extra like a particle effect or something?

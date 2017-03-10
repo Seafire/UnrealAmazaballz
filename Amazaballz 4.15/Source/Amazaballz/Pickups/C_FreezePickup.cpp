@@ -3,6 +3,9 @@
 #include "Amazaballz.h"
 #include "C_FreezePickup.h"
 
+/*
+ * Used to enable player movement again.
+ */
 void AC_FreezePickup::UnFreeze()
 {
 	picked_up_ = false;
@@ -13,6 +16,10 @@ void AC_FreezePickup::UnFreeze()
 		PickupDestroy();
 }
 
+/*
+ * Provides a standard response for colliding with this pickup.
+ * @param actor the actor that is colliding with this game object.
+ */
 void AC_FreezePickup::PickupResponse(AActor* actor)
 {
 	// Accessing the static mesh component of the character and checking if the actor is a player character.
@@ -57,6 +64,9 @@ void AC_FreezePickup::PickupResponse(AActor* actor)
 	}
 }
 
+/*
+ * Defines what happens when we destroy this item.
+ */
 void AC_FreezePickup::PickupDestroy()
 {
 	// We could have something extra like a particle effect or something?

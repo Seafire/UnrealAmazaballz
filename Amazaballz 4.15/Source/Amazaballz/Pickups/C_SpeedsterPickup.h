@@ -1,30 +1,35 @@
 // Hilltown Games (C).
 
+/*
+ * Speedster Pickup
+ * ================
+ *
+ * Created:		2017/03/04 19:45
+ * Class Name:	AC_SpeedsterPickup
+ * Base Class:	AC_BasePickup
+ * Author(s):	Jason Mottershead
+ *
+ * Purpose:		Provides more specific functionality for speedster pickup.
+ */
+
 #pragma once
 
 #include "Pickups/C_BasePickup.h"
 #include "C_SpeedsterPickup.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class AMAZABALLZ_API AC_SpeedsterPickup : public AC_BasePickup
 {
 	GENERATED_BODY()
 	
 	public:
-		// Called every frame
 		virtual void Tick(float DeltaSeconds) override;
 
 	protected:
-		// Methods.
-		// Overriding base pickup methods.
 		virtual void PickupResponse(AActor* actor) override;
 		virtual void PickupDestroy() override;
 
 	private:
-		// Attributes.
 		UPROPERTY(EditAnywhere, Category = "Pickup Properties")																							// How long will player's speed be affected for?
 			float speedster_timer_;
 
@@ -35,6 +40,5 @@ class AMAZABALLZ_API AC_SpeedsterPickup : public AC_BasePickup
 		FTimerHandle unused_handle_;
 		UStaticMeshComponent* mesh_ = nullptr;
 
-		// Methods.
 		void NormalSpeed();
 };

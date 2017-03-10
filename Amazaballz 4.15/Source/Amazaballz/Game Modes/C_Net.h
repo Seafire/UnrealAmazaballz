@@ -1,5 +1,17 @@
 // Hilltown Games (C).
 
+/*
+ * Net
+ * ===
+ *
+ * Created:		2017/03/04 19:45
+ * Class Name:	AC_Net
+ * Base Class:	AActor
+ * Author(s):	Jason Mottershead
+ *
+ * Purpose:		Provides standard functionality for a net in a game mode.
+ */
+
 #pragma once
 
 #include "GameFramework/Actor.h"
@@ -8,6 +20,9 @@
 #include "Game Modes/C_Ball.h"
 #include "C_Net.generated.h"
 
+/*
+ * An enum to define what team this net belongs to.
+ */
 UENUM(BlueprintType)
 namespace E_Team
 {
@@ -24,11 +39,9 @@ class AMAZABALLZ_API AC_Net : public AActor
 	GENERATED_BODY()
 	
 	public:	
-		// Sets default values for this actor's properties
 		AC_Net();
 
 	protected:
-		// Called when the game starts or when spawned
 		virtual void BeginPlay() override;
 
 	public:
@@ -38,7 +51,6 @@ class AMAZABALLZ_API AC_Net : public AActor
 		UFUNCTION(BlueprintCallable, Category = "Ball Game Mode")
 			TEnumAsByte<E_Team::Type>& GetTeam();
 
-		// Called every frame
 		virtual void Tick(float DeltaTime) override;	
 
 	protected: 

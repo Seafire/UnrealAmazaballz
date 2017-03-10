@@ -1,26 +1,32 @@
 // Hilltown Games (C).
 
+/*
+ * Disable Pickup
+ * ==============
+ *
+ * Created:		2017/03/04 19:45
+ * Class Name:	AC_InvisibilityPickup
+ * Base Class:	AC_BasePickup
+ * Author(s):	Jason Mottershead
+ *
+ * Purpose:		Provides more specific functionality for invisibility pickup.
+ */
+
 #pragma once
 
 #include "Pickups/C_BasePickup.h"
 #include "C_InvisibilityPickup.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class AMAZABALLZ_API AC_InvisibilityPickup : public AC_BasePickup
 {
 	GENERATED_BODY()
 
 	protected:
-		// Methods.
-		// Overriding base pickup methods.
 		virtual void PickupResponse(AActor* actor) override;
 		virtual void PickupDestroy() override;
 
 	private:
-		// Attributes.
 		UPROPERTY(EditAnywhere, Category = "Pickup Properties")		// How long will the player be invisible for?
 			float invisibility_timer_;
 
@@ -28,7 +34,6 @@ class AMAZABALLZ_API AC_InvisibilityPickup : public AC_BasePickup
 		FTimerHandle unused_handle_;
 		UStaticMeshComponent* mesh_ = nullptr;
 
-		// Methods.
 		void Visibility();
 	
 };

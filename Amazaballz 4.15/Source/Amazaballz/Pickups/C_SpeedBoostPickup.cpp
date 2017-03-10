@@ -3,6 +3,10 @@
 #include "Amazaballz.h"
 #include "C_SpeedBoostPickup.h"
 
+/*
+ * Provides a standard response for colliding with this pickup.
+ * @param actor the actor that is colliding with this game object.
+ */
 void AC_SpeedBoostPickup::PickupResponse(AActor* actor)
 {
 	// Accessing the static mesh component of the character and checking if the actor is a player character.
@@ -29,6 +33,9 @@ void AC_SpeedBoostPickup::PickupResponse(AActor* actor)
 	}
 }
 
+/*
+ * Defines what happens when we destroy this item.
+ */
 void AC_SpeedBoostPickup::PickupDestroy()
 {
 	// We could have something extra like a particle effect or something?

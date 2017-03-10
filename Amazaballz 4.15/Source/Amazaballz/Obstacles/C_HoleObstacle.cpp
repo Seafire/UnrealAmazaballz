@@ -3,6 +3,9 @@
 #include "Amazaballz.h"
 #include "C_HoleObstacle.h"
 
+/*
+ * Used when holes should respawn the player.
+ */
 void AC_HoleObstacle::Respawn()
 {	
 	if (!interacting_players_.empty())
@@ -18,6 +21,10 @@ void AC_HoleObstacle::Respawn()
 		Super::Destroy();
 }
 
+/*
+ * Provides a standard response for colliding with this obstacle.
+ * @param actor the actor that is colliding with this game object.
+ */
 void AC_HoleObstacle::ObstacleResponse(AActor* actor)
 {
 	// Accessing the static mesh component of the character and checking if the actor is a player character.
@@ -63,6 +70,10 @@ void AC_HoleObstacle::ObstacleResponse(AActor* actor)
 	}
 }
 
+/*
+ * Provides a standard response for exiting colliders with this obstacle.
+ * @param actor the actor that is no longer colliding with this game object.
+ */
 void AC_HoleObstacle::ObstacleLeft(AActor* actor)
 {
 	// We could have something extra like a particle effect or something?

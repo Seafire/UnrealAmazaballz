@@ -193,10 +193,10 @@ FVector& AC_Player::GetSpawnPosition()
 }
 
 /*
- * Sets the constant spawning flag for the player.
- * @param value if the player should have infinite lives essentially.
+ * Gets the current immortality status of the player.
+ * @return bool if this player has infinite lives.
  */
-bool & AC_Player::HasInfiniteLives()
+bool& AC_Player::HasInfiniteLives()
 {
 	return has_infinite_lives_;
 }

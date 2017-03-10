@@ -4,7 +4,7 @@
  * Moving Object
  * =============
  * 
- * Created:		2016/11/11 20:40:10
+ * Created:		2016/11/11 20:40
  * Class Name:	UC_MovingObjectComponent
  * Base Class:	UActorComponent
  * Author(s):	Conor Paterson and Jason Mottershead
@@ -25,13 +25,11 @@ class AMAZABALLZ_API UC_MovingObjectComponent : public UActorComponent
 	GENERATED_BODY()
 
 	public:	
-		// Methods.
 		UC_MovingObjectComponent();
 		virtual void BeginPlay() override;
 		virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
 	private:
-		// Attributes.
 		UPROPERTY(EditAnywhere, Category = "Move Object")	// How fast will the object move between the waypoints.
 			float speed_;
 
@@ -43,11 +41,12 @@ class AMAZABALLZ_API UC_MovingObjectComponent : public UActorComponent
 		int from_waypoint_index_;							// The current waypoint index.
 		float percentage_between_waypoints_;				// How far we are from the next waypoint.
 
-		// Methods.
 		void NextPoint();
 		FVector CalculateMovement(float delta_time);
 
-		// Getters/Setters.
-		// This will allow us to get the current percentage to the next waypoint.
+		/*
+		 * Provides access to the percentage this component is to the next waypoint.
+		 * @return float the percentage to the next waypoint.
+		 */
 		inline float get_percentage_to_waypoint() { return percentage_between_waypoints_; }
 };

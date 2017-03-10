@@ -3,7 +3,9 @@
 #include "Amazaballz.h"
 #include "C_BaseObstacle.h"
 
-// Sets default values
+/*
+ * Sets the default values.
+ */
 AC_BaseObstacle::AC_BaseObstacle() :
 	player_tag_("Player"),
 	player_controller_(nullptr),
@@ -13,16 +15,24 @@ AC_BaseObstacle::AC_BaseObstacle() :
 	PrimaryActorTick.bCanEverTick = true;
 }
 
+/*
+ * Destructs the object.
+ */
 AC_BaseObstacle::~AC_BaseObstacle()
 {}
 
-// Called when the game starts or when spawned
+/*
+ * Called when the game starts or when spawned.
+ */
 void AC_BaseObstacle::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
-// Called every frame
+/*
+ * Called every frame.
+ * @param DeltaTime the time passed since the last frame update.
+ */
 void AC_BaseObstacle::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );

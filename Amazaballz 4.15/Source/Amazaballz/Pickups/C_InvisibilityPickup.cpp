@@ -3,6 +3,9 @@
 #include "Amazaballz.h"
 #include "C_InvisibilityPickup.h"
 
+/*
+ * Used to make the player visible again.
+ */
 void AC_InvisibilityPickup::Visibility()
 {
 	picked_up_ = false;
@@ -12,6 +15,10 @@ void AC_InvisibilityPickup::Visibility()
 		PickupDestroy();
 }
 
+/*
+ * Provides a standard response for colliding with this pickup.
+ * @param actor the actor that is colliding with this game object.
+ */
 void AC_InvisibilityPickup::PickupResponse(AActor* actor)
 {
 	// Accessing the static mesh component of the character and checking if the actor is a player character.
@@ -47,6 +54,9 @@ void AC_InvisibilityPickup::PickupResponse(AActor* actor)
 	}
 }
 
+/*
+ * Defines what happens when we destroy this item.
+ */
 void AC_InvisibilityPickup::PickupDestroy()
 {
 	// We could have something extra like a particle effect or something?

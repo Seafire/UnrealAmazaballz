@@ -3,6 +3,9 @@
 #include "Amazaballz.h"
 #include "C_SpeedsterPickup.h"
 
+/*
+ * Used to bring the player back to normal speed.
+ */
 void AC_SpeedsterPickup::NormalSpeed()
 {
 	picked_up_ = false;
@@ -11,6 +14,10 @@ void AC_SpeedsterPickup::NormalSpeed()
 		PickupDestroy();
 }
 
+/*
+ * Provides a standard response for colliding with this pickup.
+ * @param actor the actor that is colliding with this game object.
+ */
 void AC_SpeedsterPickup::PickupResponse(AActor* actor)
 {
 	// Accessing the static mesh component of the character and checking if the actor is a player character.
@@ -49,6 +56,9 @@ void AC_SpeedsterPickup::PickupResponse(AActor* actor)
 	}
 }
 
+/*
+ * Defines what happens when we destroy this item.
+ */
 void AC_SpeedsterPickup::PickupDestroy()
 {
 	// We could have something extra like a particle effect or something?
@@ -56,6 +66,10 @@ void AC_SpeedsterPickup::PickupDestroy()
 	Super::Destroy();
 }
 
+/*
+ * Called every frame.
+ * @param DeltaTime the time passed since the last frame update.
+ */
 void AC_SpeedsterPickup::Tick(float DeltaTime)
 {
 	if (picked_up_)

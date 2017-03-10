@@ -1,24 +1,21 @@
 // Hilltown Games (C).
 
 /*
+ *	Base Pickup
+ *	===========
+ *
+ * Created:		2017/02/12 20:58
+ * Class Name: 	AC_BasePickup
+ * Base Class:	AActor
+ * Author(s):	Jason Mottershead
+ *
+ * Purpose:		To provide a standard interface for all pickups in the game, all pickups
+ *				must implement logic based on what the base pickup defines.
+ *
+ */
 
-	Base Pickup
-	===========
-
-	Created:	2017/02/12 20:58:10
-	Class Name: AC_BasePickup
-	Base Class:	AActor
-	Author(s):	Jason Mottershead
-
-	Purpose:	To provide a standard interface for all pickups in the game, all pickups
-				must implement logic based on what the base pickup defines.
-
-*/
-
-// Header guard.
 #pragma once
 
-// Includes here.
 #include "GameFramework/Actor.h"
 #include <iostream>
 #include <vector>
@@ -27,6 +24,9 @@
 
 using namespace std;
 
+/*
+ * An enum to define who the pickups effect.
+ */
 UENUM(BlueprintType)
 namespace E_AffectedCharacters
 {
@@ -47,11 +47,8 @@ class AMAZABALLZ_API AC_BasePickup : public AActor
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	AC_BasePickup();
 	virtual ~AC_BasePickup();
-
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	
 	// Called every frame

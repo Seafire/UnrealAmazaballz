@@ -3,14 +3,18 @@
 #include "Amazaballz.h"
 #include "C_Ball.h"
 
-// Sets default values
+/*
+ * Sets the default values.
+ */
 AC_Ball::AC_Ball()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-// Called when the game starts or when spawned
+/*
+ * Called when the game starts or when spawned.
+ */
 void AC_Ball::BeginPlay()
 {
 	Super::BeginPlay();
@@ -28,7 +32,10 @@ void AC_Ball::Respawn()
 	SetActorLocation(spawn_position_);
 }
 
-// Called every frame
+/*
+ * Called every frame.
+ * @param DeltaTime the time passed since the last frame update.
+ */
 void AC_Ball::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

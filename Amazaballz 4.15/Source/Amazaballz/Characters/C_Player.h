@@ -4,7 +4,7 @@
  * Player
  * ======
  *
- * Created:		2017/02/19 11:27:10
+ * Created:		2017/02/19 11:27
  * Class Name:	AC_Player
  * Base Class:	ACharacter
  * Author(s):	Jason Mottershead
@@ -23,15 +23,12 @@ class AMAZABALLZ_API AC_Player : public ACharacter
 	GENERATED_BODY()
 
 	public:
-		// Methods.
 		AC_Player();
 
 	protected:
-		// Methods.
 		virtual void BeginPlay() override;
 
 	public:	
-		// Methods.
 		virtual void Tick(float DeltaTime) override;
 		virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -71,19 +68,55 @@ class AMAZABALLZ_API AC_Player : public ACharacter
 		UFUNCTION(BlueprintCallable, Category = "Player")
 			bool& HasInfiniteLives();
 
-		// Getters/Setters.
+		/*
+		 * Provides access to the rolling torque of the player.
+		 * @return float the rolling torque value.
+		 */
 		inline float& get_roll_torque()						{ return roll_torque_; }
+		
+		/*
+		 * Tells us if the player is jumping or not.
+		 * @return bool is the player jumping.
+		 */
 		inline bool& get_is_jumping()						{ return is_jumping_; }
+		
+		/*
+		 * Tells us if the player should respawn or not.
+		 * @return bool should this player respawn.
+		 */
 		inline bool& get_is_spawning()						{ return should_respawn_; }
+		
+		/*
+		 * Tells us if this player can be attacked by other players.
+		 * @return bool can this player be attacked.
+		 */
 		inline bool& get_can_be_attacked()					{ return can_be_attacked_; }
+		
+		/*
+		 * Tells us if the player can use pickups.
+		 * @return bool is the player able to use pickups.
+		 */
 		inline bool& get_can_use_pickups()					{ return can_use_pickups_; }
 
+		/*
+		 * Provides a way to set the current spawning flag for the player.
+		 * @param value if this player should respawn or not.
+		 */
 		inline void set_is_spawning(const bool value)		{ should_respawn_ = value; }
+		
+		/*
+		 * Provides a way of making this player invunerable.
+		 * @param value if this player can be attacked or not.
+		 */
 		inline void set_can_be_attacked(const bool value)	{ can_be_attacked_ = value; }
+		
+		/*
+		 * Provides a way of making this player able/unable to use pickups.
+		 * @param value if this player can use pickups or not.
+		 */
 		inline void set_can_use_pickups(const bool value)	{ can_use_pickups_ = value;  }
 
 	private:
-		// Attributes.
 		UPROPERTY(EditAnywhere, Category = "Player Properties")		// How fast will this player move? NOTE: You need to make this value really high apparently.
 			float roll_torque_ = 150000000.0f;
 
@@ -106,7 +139,9 @@ class AMAZABALLZ_API AC_Player : public ACharacter
 		bool should_respawn_ = false;
 		FVector spawn_position_;
 
-		// Getters/Setters.
-		// This will allow us to check if the player is simulating physics or not.
+		/*
+		 * Provides a way of checking if this player is using physics or not.
+		 * @return bool is this player using physics or not.
+		 */
 		inline bool is_simulating_physics() { return (mesh_->GetBodyInstance()->IsInstanceSimulatingPhysics()); }
 };

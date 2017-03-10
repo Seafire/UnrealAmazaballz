@@ -3,6 +3,10 @@
 #include "Amazaballz.h"
 #include "C_CrystalSkullPickup.h"
 
+/*
+ * Provides a standard response for colliding with this pickup.
+ * @param actor the actor that is colliding with this game object.
+ */
 void AC_CrystalSkullPickup::PickupResponse(AActor* actor)
 {
 	// Accessing the static mesh component of the character and checking if the actor is a player character.
@@ -30,6 +34,9 @@ void AC_CrystalSkullPickup::PickupResponse(AActor* actor)
 	}
 }
 
+/*
+ * Provides a standard response when the player has picked it up.
+ */
 void AC_CrystalSkullPickup::PickupDestroy()
 {
 	// We could have something extra like a particle effect or something?

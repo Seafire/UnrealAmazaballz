@@ -51,7 +51,8 @@ void UC_MovingObjectComponent::NextPoint()
 
 /*
  * This will be used to initialise attributes and decide update usage.
- * @param tick the time passed since the last frame update.
+ * @param delta_time the time passed since the last frame update.
+ * @return FVector the new velocity for the moving object.
  */
 FVector UC_MovingObjectComponent::CalculateMovement(float delta_time)
 {

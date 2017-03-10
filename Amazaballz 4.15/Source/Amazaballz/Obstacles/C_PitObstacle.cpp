@@ -3,6 +3,10 @@
 #include "Amazaballz.h"
 #include "C_PitObstacle.h"
 
+/*
+ * Provides a standard response for colliding with this obstacle.
+ * @param actor the actor that is colliding with this game object.
+ */
 void AC_PitObstacle::ObstacleResponse(AActor* actor)
 {
 	// Accessing the static mesh component of the character and checking if the actor is a player character.
@@ -25,6 +29,10 @@ void AC_PitObstacle::ObstacleResponse(AActor* actor)
 	}
 }
 
+/*
+ * Provides a standard response for exiting colliders with this obstacle.
+ * @param actor the actor that is no longer colliding with this game object.
+ */
 void AC_PitObstacle::ObstacleLeft(AActor* actor)
 {
 	bool is_player = actor->ActorHasTag(player_tag_);
@@ -49,6 +57,10 @@ void AC_PitObstacle::ObstacleLeft(AActor* actor)
 	entered_ = false;
 }
 
+/*
+ * Called every frame.
+ * @param DeltaTime the time passed since the last frame update.
+ */
 void AC_PitObstacle::Tick(float DeltaTime)
 {
 	//if (entered_)
