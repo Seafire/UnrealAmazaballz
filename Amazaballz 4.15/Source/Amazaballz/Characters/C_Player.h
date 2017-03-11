@@ -116,7 +116,7 @@ class AMAZABALLZ_API AC_Player : public ACharacter
 		 */
 		inline void set_can_use_pickups(const bool value)	{ can_use_pickups_ = value;  }
 
-	private:
+	protected:
 		UPROPERTY(EditAnywhere, Category = "Player Properties")		// How fast will this player move? NOTE: You need to make this value really high apparently.
 			float roll_torque_ = 150000000.0f;
 
