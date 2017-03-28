@@ -26,6 +26,9 @@ class AMAZABALLZ_API AC_MirrorPickup : public AC_BasePickup
 		virtual void PickupResponse(AActor* actor) override;
 		virtual void PickupDestroy() override;
 
+		void ApplyPickupEffect() override;
+		void UndoPickupEffect() override;
+
 	private:
 		UPROPERTY(EditAnywhere, Category = "Pickup Properties")	// How long will the attacks of other players be reflected for?
 			float mirror_timer_;

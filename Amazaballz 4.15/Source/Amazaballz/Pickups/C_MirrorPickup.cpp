@@ -64,3 +64,9 @@ void AC_MirrorPickup::PickupDestroy()
 	// Destroy this pickup.
 	Super::Destroy();
 }
+
+void AC_MirrorPickup::ApplyPickupEffect()
+{}
+
+void AC_MirrorPickup::UndoPickupEffect()
+{}

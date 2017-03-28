@@ -9,6 +9,7 @@
 void AC_InvisibilityPickup::Visibility()
 {
 	picked_up_ = false;
+	interacting_player_->GetMesh()->SetVisibility(true);
 
 	if (destroyed_after_use_)
 		PickupDestroy();
@@ -28,11 +29,12 @@ void AC_InvisibilityPickup::PickupResponse(AActor* actor)
 	if (is_player)
 	{
 		//AC_Player* player = Cast<AC_Player>(actor);
-		AC_Character* player = Cast<AC_Character>(actor);
+		interacting_player_ = Cast<AC_Character>(actor);
 
-		if (!picked_up_ && player->CanUsePickups())
+		if (!picked_up_ && interacting_player_->CanUsePickups())
 		{
 			//mesh_->SetVisibility(false);
+			interacting_player_->GetMesh()->SetVisibility(false);
 			picked_up_ = true;
 
 			// Make the player visibile after a set time.
@@ -58,3 +60,9 @@ void AC_InvisibilityPickup::PickupDestroy()
 	// Destroy this pickup.
 	Super::Destroy();
 }
+
+void AC_InvisibilityPickup::ApplyPickupEffect()
+{}
+
+void AC_InvisibilityPickup::UndoPickupEffect()
+{}

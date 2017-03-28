@@ -3,12 +3,23 @@
 #include "Amazaballz.h"
 #include "C_SpeedsterPickup.h"
 
+void AC_SpeedsterPickup::BeginPlay()
+{
+	Super::BeginPlay();
+
+	original_speed_ = 600.0f;
+	original_acceleration_ = 2048.0f;
+}
+
 /*
  * Used to bring the player back to normal speed.
  */
 void AC_SpeedsterPickup::NormalSpeed()
 {
 	picked_up_ = false;
+
+	interacting_player_->GetCharacterMovement()->MaxWalkSpeed = original_speed_;
+	interacting_player_->GetCharacterMovement()->MaxAcceleration = original_acceleration_;
 
 	if (destroyed_after_use_)
 		PickupDestroy();
@@ -22,30 +33,29 @@ void AC_SpeedsterPickup::PickupResponse(AActor* actor)
 {
 	// Accessing the static mesh component of the character and checking if the actor is a player character.
 	bool is_player = actor->ActorHasTag(player_tag_);
-	UStaticMeshComponent* pickup_mesh_ = FindComponentByClass<UStaticMeshComponent>();
+	UStaticMeshComponent* pickup_mesh = FindComponentByClass<UStaticMeshComponent>();
 
 	// If this actor is a player character.
 	if (is_player)
 	{
-		//AC_Player* player = Cast<AC_Player>(actor);
-		AC_Character* player = Cast<AC_Character>(actor);
+		interacting_player_ = Cast<AC_Character>(actor);
 
-		if (!picked_up_ && player->CanUsePickups())
+		if (!picked_up_ && interacting_player_->CanUsePickups())
 		{			
 			picked_up_ = true;
 
-			//if(!(speedster_factor_ < 1.0f))
-			//	mesh_->SetPhysicsLinearVelocity(mesh_->GetPhysicsLinearVelocity() * speedster_factor_);
-
+			interacting_player_->GetCharacterMovement()->MaxWalkSpeed *= speedster_factor_;
+			interacting_player_->GetCharacterMovement()->MaxAcceleration *= speedster_factor_;
+			
 			// Enable player input after a set time.
 			GetWorldTimerManager().SetTimer(unused_handle_, this, &AC_SpeedsterPickup::NormalSpeed, speedster_timer_, false);
 
 			// This should hopefully fix the multiple collisions messing up the freeze pickup timer response.
 			// Need to test this out at Conor's.
-			if (pickup_mesh_ && destroyed_after_use_)
+			if (pickup_mesh && destroyed_after_use_)
 			{
-				pickup_mesh_->SetVisibility(false);
-				pickup_mesh_->DestroyComponent();
+				pickup_mesh->SetVisibility(false);
+				pickup_mesh->DestroyComponent();
 			}
 		}
 	}
@@ -61,16 +71,8 @@ void AC_SpeedsterPickup::PickupDestroy()
 	Super::Destroy();
 }
 
-/*
- * Called every frame.
- * @param DeltaTime the time passed since the last frame update.
- */
-void AC_SpeedsterPickup::Tick(float DeltaTime)
-{
-	if (picked_up_)
-	{
-		// This will affect the player's speed.
-		//if (speedster_factor_ < 1.0f)
-		//	mesh_->SetPhysicsLinearVelocity(mesh_->GetPhysicsLinearVelocity() * speedster_factor_);
-	}
-}
+void AC_SpeedsterPickup::ApplyPickupEffect()
+{}
+
+void AC_SpeedsterPickup::UndoPickupEffect()
+{}

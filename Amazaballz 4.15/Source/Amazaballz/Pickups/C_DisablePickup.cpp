@@ -9,11 +9,8 @@
  */
 void AC_DisablePickup::EnablePickups()
 {
+	UndoPickupEffect();
 	picked_up_ = false;
-
-	// Enable other player pickups after use.
-	//player->set_can_use_pickups(true);
-	interacting_player_->SetCanUsePickups(true);
 
 	if (destroyed_after_use_)
 		PickupDestroy();
@@ -32,20 +29,11 @@ void AC_DisablePickup::PickupResponse(AActor* actor)
 	// If this actor is a player character.
 	if (is_player)
 	{
-		//AC_Player* player = Cast<AC_Player>(actor);
-		//AC_Character* player = Cast<AC_Character>(actor);
 		interacting_player_ = Cast<AC_Character>(actor);
 
-		// We would need to loop through all of the other players.
-		// Checking to see if they are not equal to this player.
-		// And then disable their input, and UnFreeze them after a timer.
 		if (!picked_up_ && interacting_player_->CanUsePickups())
 		{
-			// Disable other player pickup logic here
-			// Need to loop through all of the players and use the below line.
-			//player->set_can_use_pickups(false);
-			interacting_player_->SetCanUsePickups(false);
-
+			ApplyPickupEffect();
 			picked_up_ = true;
 
 			// Enable player pickups after a set time.
@@ -70,4 +58,39 @@ void AC_DisablePickup::PickupDestroy()
 	// We could have something extra like a particle effect or something?
 	// Destroy this pickup.
 	Super::Destroy();
+}
+
+void AC_DisablePickup::ApplyPickupEffect()
+{
+	TArray<AActor*> players;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AC_Character::StaticClass(), players);
+
+	if (players.Num() > 1)
+	{
+		for (size_t i = 0; i < players.Num(); ++i)
+		{
+			AC_Character* currentPlayer = Cast<AC_Character>(players[i]);
+
+			// If the index of a found player IS NOT equal to the interacting player.
+			if (currentPlayer->GetIndex() != interacting_player_->GetIndex())
+				currentPlayer->SetCanUsePickups(false);
+		}
+	}
+}
+
+void AC_DisablePickup::UndoPickupEffect()
+{
+	TArray<AActor*> players;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AC_Character::StaticClass(), players);
+
+	if (players.Num() > 1)
+	{
+		for (size_t i = 0; i < players.Num(); ++i)
+		{
+			AC_Character* currentPlayer = Cast<AC_Character>(players[i]);
+
+			if (!currentPlayer->CanUsePickups())
+				currentPlayer->SetCanUsePickups(true);
+		}
+	}
 }

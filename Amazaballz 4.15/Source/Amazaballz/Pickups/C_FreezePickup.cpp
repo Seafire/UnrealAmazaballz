@@ -8,6 +8,7 @@
  */
 void AC_FreezePickup::UnFreeze()
 {
+	UndoPickupEffect();
 	picked_up_ = false;
 
 	if (destroyed_after_use_)
@@ -27,15 +28,12 @@ void AC_FreezePickup::PickupResponse(AActor* actor)
 	// If this actor is a player character.
 	if (is_player)
 	{
-		//AC_Player* player = Cast<AC_Player>(actor);
-		AC_Character* player = Cast<AC_Character>(actor);
-			
-		if (!picked_up_ && player->CanUsePickups())
+		interacting_player_ = Cast<AC_Character>(actor);
+		
+		if (!picked_up_ && interacting_player_->CanUsePickups())
 		{
+			ApplyPickupEffect();
 			picked_up_ = true;
-
-			// This also needs to set the collision of this pickup to be disabled.
-			// So that the pickup is actually destroyed correctly.
 
 			// Enable player input after a set time.
 			GetWorldTimerManager().SetTimer(unused_handle_, this, &AC_FreezePickup::UnFreeze, freeze_timer_, false);
@@ -59,4 +57,39 @@ void AC_FreezePickup::PickupDestroy()
 	// We could have something extra like a particle effect or something?
 	// Destroy this pickup.
 	Super::Destroy();
+}
+
+void AC_FreezePickup::ApplyPickupEffect()
+{
+	TArray<AActor*> players;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AC_Character::StaticClass(), players);
+	if (players.Num() > 1)
+	{
+		for (size_t i = 0; i < players.Num(); ++i)
+		{
+			AC_Character* currentPlayer = Cast<AC_Character>(players[i]);
+
+			// If the index of a found player IS NOT equal to the interacting player.
+			if (currentPlayer->GetIndex() != interacting_player_->GetIndex())
+				currentPlayer->GetCharacterMovement()->SetActive(false);
+		}
+	}
+}
+
+void AC_FreezePickup::UndoPickupEffect()
+{
+	TArray<AActor*> players;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AC_Character::StaticClass(), players);
+
+	if (players.Num() > 1)
+	{
+		for (size_t i = 0; i < players.Num(); ++i)
+		{
+			AC_Character* currentPlayer = Cast<AC_Character>(players[i]);
+
+			// If the index of a found player IS NOT equal to the interacting player.
+			if (currentPlayer->GetIndex() != interacting_player_->GetIndex())
+				currentPlayer->GetCharacterMovement()->SetActive(true);
+		}
+	}
 }

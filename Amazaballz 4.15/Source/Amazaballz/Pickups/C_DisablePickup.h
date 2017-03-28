@@ -26,6 +26,9 @@ class AMAZABALLZ_API AC_DisablePickup : public AC_BasePickup
 		virtual void PickupResponse(AActor* actor) override;
 		virtual void PickupDestroy() override;
 
+		void ApplyPickupEffect() override;
+		void UndoPickupEffect() override;
+
 	private:
 		UPROPERTY(EditAnywhere, Category = "Pickup Properties")	// How long will all of the other players not have access to pickups for?
 			float disable_timer_;

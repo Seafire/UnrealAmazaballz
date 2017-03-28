@@ -37,3 +37,9 @@ void AC_CrystalSkullPickup::PickupDestroy()
 	// Destroy this pickup.
 	Super::Destroy();
 }
+
+void AC_CrystalSkullPickup::ApplyPickupEffect()
+{}
+
+void AC_CrystalSkullPickup::UndoPickupEffect()
+{}

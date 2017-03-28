@@ -70,4 +70,14 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Pickups")
 		virtual void PickupDestroy() PURE_VIRTUAL(AC_BasePickup::PickupDestroy(), );
 
+	/**
+	 * Provides a way to apply certain pickup effects, to help with neatness in Pickup Response.
+	 */
+	virtual void ApplyPickupEffect() PURE_VIRTUAL(AC_BasePickup::ApplyPickupEffect(), );
+
+	/**
+	 * Provides a way to undo certain pickup effects, to help with neatness in PickupDestroy.
+	 */
+	virtual void UndoPickupEffect() PURE_VIRTUAL(AC_BasePickup::UndoPickupEffect(), );
+
 };

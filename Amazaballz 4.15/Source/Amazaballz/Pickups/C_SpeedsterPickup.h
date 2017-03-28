@@ -23,11 +23,14 @@ class AMAZABALLZ_API AC_SpeedsterPickup : public AC_BasePickup
 	GENERATED_BODY()
 	
 	public:
-		virtual void Tick(float DeltaSeconds) override;
+		virtual void BeginPlay() override;
 
 	protected:
 		virtual void PickupResponse(AActor* actor) override;
 		virtual void PickupDestroy() override;
+
+		void ApplyPickupEffect() override;
+		void UndoPickupEffect() override;
 
 	private:
 		UPROPERTY(EditAnywhere, Category = "Pickup Properties")																							// How long will player's speed be affected for?
@@ -38,6 +41,8 @@ class AMAZABALLZ_API AC_SpeedsterPickup : public AC_BasePickup
 
 		bool picked_up_ = false;
 		FTimerHandle unused_handle_;
+		float original_speed_ = 0.0f, original_acceleration_ = 0.0f;
+		AC_Character* interacting_player_ = nullptr;
 
 		void NormalSpeed();
 };
