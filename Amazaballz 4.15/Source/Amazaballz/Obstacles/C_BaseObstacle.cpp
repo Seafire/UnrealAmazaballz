@@ -8,7 +8,6 @@
  */
 AC_BaseObstacle::AC_BaseObstacle() :
 	player_tag_("Player"),
-	player_controller_(nullptr),
 	entered_(false)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.

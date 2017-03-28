@@ -10,22 +10,19 @@
 void AC_PitObstacle::ObstacleResponse(AActor* actor)
 {
 	// Accessing the static mesh component of the character and checking if the actor is a player character.
-	mesh_ = actor->FindComponentByClass<UStaticMeshComponent>();
+	//mesh_ = actor->FindComponentByClass<UStaticMeshComponent>();
+	character_movement_ = actor->FindComponentByClass<UCharacterMovementComponent>();
 	bool is_player = actor->ActorHasTag(player_tag_);
 
 	// If this actor is a player character.
 	if (is_player)
 	{
-		// If the mesh exists.
-		if (mesh_)
-		{
-			entered_ = true;
-			AC_Player* player = Cast<AC_Player>(actor);
-			interacting_players_.push_back(player);
-
-			if (destroyed_after_use_)
-				Super::Destroy();
-		}
+		entered_ = true;
+		AC_Character* player = Cast<AC_Character>(actor);
+		interacting_players_.push_back(player);
+		
+		if (destroyed_after_use_)
+			Super::Destroy();
 	}
 }
 
@@ -39,16 +36,20 @@ void AC_PitObstacle::ObstacleLeft(AActor* actor)
 
 	if (is_player)
 	{
-		AC_Player* player = Cast<AC_Player>(actor);
+		AC_Character* player = Cast<AC_Character>(actor);
 
 		// We could have something extra like a particle effect or something?
 		if (!interacting_players_.empty())
 		{
-			for (size_t i = 0; i < interacting_players_.size(); i++)
+			for (size_t i = 0; i < interacting_players_.size(); ++i)
 			{
+				// Temporary reference, so there are less calls to the pointer reference in the vector.
+				AC_Character* character = interacting_players_[i];
+
 				// If this player should be removed from the obstacle colliding player vector.
-				if (interacting_players_[i]->GetIndex() == player->GetIndex())
+				if (character->GetIndex() == player->GetIndex())
 				{
+					character->SetSpeedToNormal();
 					interacting_players_.erase(interacting_players_.begin() + i);
 				}
 			}
@@ -63,16 +64,14 @@ void AC_PitObstacle::ObstacleLeft(AActor* actor)
  */
 void AC_PitObstacle::Tick(float DeltaTime)
 {
-	//if (entered_)
-	//{
-	//	mesh_->SetPhysicsLinearVelocity(mesh_->GetPhysicsLinearVelocity() * speed_multiplier_);
-	//}
 	if (!interacting_players_.empty())
 	{
 		for (size_t i = 0; i < interacting_players_.size(); i++)
 		{
-			UStaticMeshComponent* temp_mesh = interacting_players_[i]->FindComponentByClass<UStaticMeshComponent>();
-			temp_mesh->SetPhysicsLinearVelocity(temp_mesh->GetPhysicsLinearVelocity() * speed_multiplier_);
+			AC_Character* character = interacting_players_[i];
+
+			if (character->GetSpeed() != speed_multiplier_)
+				character->SetSpeed(speed_multiplier_);
 		}
 	}
 }

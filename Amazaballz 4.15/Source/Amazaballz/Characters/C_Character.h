@@ -10,9 +10,9 @@ class AMAZABALLZ_API AC_Character : public ACharacter
 {
 	GENERATED_BODY()
 
-		/** Camera boom positioning the camera behind the character */
-		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-		class USpringArmComponent* CameraBoom;
+	/** Camera boom positioning the camera behind the character */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	class USpringArmComponent* CameraBoom;
 
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
@@ -28,7 +28,66 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 		float BaseLookUpRate;
 
+	/**
+	 * Allows us to set the current player index value for this character.
+	 * @param index the index number of this player.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		void SetIndex(int index);
+
+	/**
+	 * Allows us to make this player immortal.
+	 * @param value if this player has infinite lives or not.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		void SetInfiniteLives(const bool value);
+
+	/**
+	 * Allows us to alter the speed of this character.
+	 * @param speedMultiplier how fast this player should move.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		void SetSpeed(const float speedMultiplier);
+
+	/**
+	 * Allows us to reset the speed modifier for this character to the original value.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		void SetSpeedToNormal();
+
+	/**
+	 * Provides access to the current player index for this character.
+	 * @return int the index number for this player.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		int GetIndex();
+
+	/**
+	 * Provides access to the current status for infinite lives for this player.
+	 * @return bool& if this player has infinite lives or not.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		bool& HasInfiniteLives();
+
+	/**
+	 * Provides access to the current speed modifier for this character.
+	 * @return float& the value of the speed modifier for this character.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		float& GetSpeed();
+
 protected:
+	int player_index_ = 0;
+	float original_speed_ = 2.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Player Properties")		// How fast will this character move?
+		float speed_ = 2.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Player Properties")		// Will this player be able to constantly respawn in or not?
+		bool has_infinite_lives_ = false;
+
+	UPROPERTY(EditAnywhere, Category = "Player Properties")		// How many lives does this player have?
+		int lives_ = 3;
 
 	/** Resets HMD orientation in VR. */
 	void OnResetVR();
@@ -61,6 +120,8 @@ protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	// End of APawn interface
+
+	
 
 public:
 	/** Returns CameraBoom subobject **/

@@ -25,6 +25,8 @@ AC_Character::AC_Character()
 	GetCharacterMovement()->JumpZVelocity = 600.f;
 	GetCharacterMovement()->AirControl = 0.2f;
 
+	// Setting up the original speed multiplier of the character.
+	original_speed_ = speed_;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -87,7 +89,7 @@ void AC_Character::MoveForward(float Value)
 
 		// get forward vector
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-		AddMovementInput(Direction, Value);
+		AddMovementInput(Direction, (Value * speed_));
 	}
 }
 
@@ -101,7 +103,43 @@ void AC_Character::MoveRight(float Value)
 
 		// get right vector 
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+
 		// add movement in that direction
-		AddMovementInput(Direction, Value);
+		AddMovementInput(Direction, (Value * speed_));
 	}
+}
+
+void AC_Character::SetIndex(int index)
+{
+	player_index_ = index;
+}
+
+void AC_Character::SetInfiniteLives(const bool value)
+{
+	has_infinite_lives_ = value;
+}
+
+void AC_Character::SetSpeed(const float speedMultiplier)
+{
+	speed_ = speedMultiplier;
+}
+
+void AC_Character::SetSpeedToNormal()
+{
+	speed_ = original_speed_;
+}
+
+int AC_Character::GetIndex()
+{
+	return player_index_;
+}
+
+bool& AC_Character::HasInfiniteLives()
+{
+	return has_infinite_lives_;
+}
+
+float& AC_Character::GetSpeed()
+{
+	return speed_;
 }

@@ -1,6 +1,6 @@
 // Hilltown Games (C).
 
-/*
+/**
  * Base Obstacle
  * =============
  *
@@ -16,7 +16,7 @@
 
 #include <vector>
 #include "GameFramework/Actor.h"
-#include "Characters/C_Player.h"
+#include "Characters/C_Character.h"
 #include "C_BaseObstacle.generated.h"
 
 UCLASS(abstract)
@@ -32,10 +32,9 @@ class AMAZABALLZ_API AC_BaseObstacle : public AActor
 
 	protected:
 		const FName player_tag_;
-		APlayerController* player_controller_ = nullptr;
-		UStaticMeshComponent* mesh_ = nullptr;
+		UCharacterMovementComponent* character_movement_ = nullptr;
 		bool entered_;
-		std::vector<AC_Player*> interacting_players_;
+		std::vector<AC_Character*> interacting_players_;
 
 		UPROPERTY(EditAnywhere, Category = "Obstacle Properties")	// If this obstacle will be destroyed after a player interacts with it.
 			bool destroyed_after_use_;							
