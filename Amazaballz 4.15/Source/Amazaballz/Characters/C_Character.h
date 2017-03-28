@@ -78,10 +78,8 @@ public:
 
 protected:
 	int player_index_ = 0;
-	float original_speed_ = 2.0f;
-
-	UPROPERTY(EditAnywhere, Category = "Player Properties")		// How fast will this character move?
-		float speed_ = 2.0f;
+	float original_speed_ = 1.0f;
+	float speed_ = 1.0f;
 
 	UPROPERTY(EditAnywhere, Category = "Player Properties")		// Will this player be able to constantly respawn in or not?
 		bool has_infinite_lives_ = false;
