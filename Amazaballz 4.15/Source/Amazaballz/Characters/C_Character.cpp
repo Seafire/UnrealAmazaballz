@@ -27,6 +27,7 @@ AC_Character::AC_Character()
 
 	// Setting up the original speed multiplier of the character.
 	original_speed_ = speed_;
+
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -49,8 +50,9 @@ void AC_Character::SetupPlayerInputComponent(class UInputComponent* PlayerInputC
 	PlayerInputComponent->BindAxis("TurnRate", this, &AC_Character::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AC_Character::LookUpAtRate);
-}
 
+	spawn_position_.Set(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z);
+}
 
 void AC_Character::OnResetVR()
 {
@@ -109,6 +111,49 @@ void AC_Character::MoveRight(float Value)
 	}
 }
 
+void AC_Character::Respawn()
+{
+	// If this player should be able to just constantly respawn back into the game.
+	if (has_infinite_lives_)
+	{
+		// Teleport the player to the spawn position.
+		SetActorLocation(spawn_position_);
+		is_spawning_ = false;
+	}
+	// Otherwise, the player has a limited amount of lives.
+	else
+	{
+		if (is_spawning_)
+		{
+			// If the player still has lives, respawn them.
+			if ((lives_ + 1) > 0)
+			{
+				// Teleport the player to the spawn position.
+				SetActorLocation(spawn_position_);
+				is_spawning_ = false;
+			}
+			// Otherwise, the player has no lives left.
+			else
+				Super::Destroy();
+		}
+	}
+}
+
+void AC_Character::SetSpawningStatus(const bool value)
+{
+	is_spawning_ = value;
+}
+
+void AC_Character::SetCanBeAttacked(const bool value)
+{
+	can_be_attacked_ = value;
+}
+
+void AC_Character::SetCanUsePickups(const bool value)
+{
+	can_use_pickups_ = value;
+}
+
 void AC_Character::SetIndex(int index)
 {
 	player_index_ = index;
@@ -129,6 +174,31 @@ void AC_Character::SetSpeedToNormal()
 	speed_ = original_speed_;
 }
 
+void AC_Character::SetLives(int lives)
+{
+	lives_ = lives;
+}
+
+void AC_Character::SetSpawnPosition(const FVector value)
+{
+	spawn_position_ = value;
+}
+
+bool& AC_Character::IsSpawning()
+{
+	return is_spawning_;
+}
+
+bool& AC_Character::CanBeAttacked()
+{
+	return can_be_attacked_;
+}
+
+bool& AC_Character::CanUsePickups()
+{
+	return can_use_pickups_;
+}
+
 int AC_Character::GetIndex()
 {
 	return player_index_;
@@ -142,4 +212,9 @@ bool& AC_Character::HasInfiniteLives()
 float& AC_Character::GetSpeed()
 {
 	return speed_;
+}
+
+int& AC_Character::GetLives()
+{
+	return lives_;
 }

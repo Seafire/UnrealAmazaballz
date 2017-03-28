@@ -10,26 +10,22 @@
 void AC_SpeedBoostPickup::PickupResponse(AActor* actor)
 {
 	// Accessing the static mesh component of the character and checking if the actor is a player character.
-	UStaticMeshComponent* mesh = actor->FindComponentByClass<UStaticMeshComponent>();
 	bool is_player = actor->ActorHasTag(player_tag_);
-	//C_Player player = actor->GetComponentByClass<C_Player>();
 
 	// If this actor is a player character.
 	if (is_player)
 	{
-		// If the mesh exists.
-		if (mesh)
-		{
-			// Access the linear velocity of the character and multiply it by the speed multiplier.
-			FVector linear_velocity = mesh->GetPhysicsLinearVelocity();
-			FVector new_velocity = linear_velocity * speed_multiplier_;
+		AC_Character* player = Cast<AC_Character>(actor);
 
-			// Increase the speed of the character.
-			mesh->SetPhysicsLinearVelocity(new_velocity);
+		// Access the linear velocity of the character and multiply it by the speed multiplier.
+		FVector linear_velocity = FVector::ZeroVector;
+		FVector new_velocity = linear_velocity * speed_multiplier_;
 
-			if (destroyed_after_use_)
-				PickupDestroy();
-		}
+		// Increase the speed of the character.
+		//mesh->SetPhysicsLinearVelocity(new_velocity);
+
+		if (destroyed_after_use_)
+			PickupDestroy();
 	}
 }
 

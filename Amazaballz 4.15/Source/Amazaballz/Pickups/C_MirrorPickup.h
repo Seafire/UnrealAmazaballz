@@ -32,7 +32,7 @@ class AMAZABALLZ_API AC_MirrorPickup : public AC_BasePickup
 
 		bool picked_up_ = false;
 		FTimerHandle unused_handle_;
-		UStaticMeshComponent* mesh_ = nullptr;
+		AC_Character* interacting_player_;
 
 		void RemoveMirror();	
 };

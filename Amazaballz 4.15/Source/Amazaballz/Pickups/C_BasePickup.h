@@ -19,7 +19,7 @@
 #include "GameFramework/Actor.h"
 #include <iostream>
 #include <vector>
-#include "Characters/C_Player.h"
+#include "Characters/C_Character.h"
 #include "C_BasePickup.generated.h"
 
 using namespace std;

@@ -32,7 +32,6 @@ class AMAZABALLZ_API AC_BaseObstacle : public AActor
 
 	protected:
 		const FName player_tag_;
-		UCharacterMovementComponent* character_movement_ = nullptr;
 		bool entered_;
 		std::vector<AC_Character*> interacting_players_;
 

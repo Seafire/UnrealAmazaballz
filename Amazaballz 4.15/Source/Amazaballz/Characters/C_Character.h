@@ -29,6 +29,33 @@ public:
 		float BaseLookUpRate;
 
 	/**
+	 * Provides a way for this character to respawn.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		virtual void Respawn();
+
+	/**
+	 * Allows us to set the spawning status of this player.
+	 * @param value if this player should spawn in or not.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		void SetSpawningStatus(const bool value);
+
+	/**
+	 * Allows us to disable attacks on this player.
+	 * @param value if this player can be attacked.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		void SetCanBeAttacked(const bool value);
+
+	/**
+	 * Allows us to disable pickups for this player.
+	 * @param value if this player can use pickups or not.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		void SetCanUsePickups(const bool value);
+
+	/**
 	 * Allows us to set the current player index value for this character.
 	 * @param index the index number of this player.
 	 */
@@ -56,6 +83,41 @@ public:
 		void SetSpeedToNormal();
 
 	/**
+	 * Allows us to set the current amount of lives this player has.
+	 * @param lives how many lives to add onto this player.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		void SetLives(int lives);
+
+	/**
+	 * Sets the spawn location for this character.
+	 * @param value where the spawn location is.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		void SetSpawnPosition(const FVector value);
+
+	/**
+	 * Provides access to the current spawning status of this character.
+	 * @return bool& if this player should respawn or not.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		bool& IsSpawning();
+
+	/**
+	 * Provides access to the current invincibility status of the player.
+	 * @return bool& if this player has can be attacked by other players or not.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		bool& CanBeAttacked();
+
+	/**
+	 * Provides access to the current pickup status of this player.
+	 * @return bool& if this player can use pickups or not.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		bool& CanUsePickups();
+
+	/**
 	 * Provides access to the current player index for this character.
 	 * @return int the index number for this player.
 	 */
@@ -76,10 +138,20 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Player")
 		float& GetSpeed();
 
+	/**
+	 * Provides access to the current number of lives this player has.
+	 * @return int the number of lives for this player.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		int& GetLives();
+
 protected:
+	bool is_spawning_ = false;
+	bool can_be_attacked_ = true, can_use_pickups_ = true;
 	int player_index_ = 0;
 	float original_speed_ = 1.0f;
 	float speed_ = 1.0f;
+	FVector spawn_position_;
 
 	UPROPERTY(EditAnywhere, Category = "Player Properties")		// Will this player be able to constantly respawn in or not?
 		bool has_infinite_lives_ = false;

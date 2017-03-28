@@ -9,9 +9,6 @@
  */
 void AC_PitObstacle::ObstacleResponse(AActor* actor)
 {
-	// Accessing the static mesh component of the character and checking if the actor is a player character.
-	//mesh_ = actor->FindComponentByClass<UStaticMeshComponent>();
-	character_movement_ = actor->FindComponentByClass<UCharacterMovementComponent>();
 	bool is_player = actor->ActorHasTag(player_tag_);
 
 	// If this actor is a player character.
