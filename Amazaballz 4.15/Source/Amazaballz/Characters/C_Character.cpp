@@ -25,9 +25,14 @@ AC_Character::AC_Character()
 	GetCharacterMovement()->JumpZVelocity = 600.f;
 	GetCharacterMovement()->AirControl = 0.2f;
 
-	// Setting up the original speed multiplier of the character.
+	// Setting custom player properties.
 	original_speed_ = speed_;
 
+	if (player_index_ != -1)
+	{
+		APlayerController* player_controller = Cast<APlayerController>(GetActorClass());
+		UGameplayStatics::SetPlayerControllerID(player_controller, player_index_);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -154,7 +159,7 @@ void AC_Character::SetCanUsePickups(const bool value)
 	can_use_pickups_ = value;
 }
 
-void AC_Character::SetIndex(int index)
+void AC_Character::SetIndex(const int32 index)
 {
 	player_index_ = index;
 }
@@ -199,7 +204,7 @@ bool& AC_Character::CanUsePickups()
 	return can_use_pickups_;
 }
 
-int AC_Character::GetIndex()
+int32& AC_Character::GetIndex()
 {
 	return player_index_;
 }

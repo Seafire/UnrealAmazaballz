@@ -60,7 +60,7 @@ public:
 	 * @param index the index number of this player.
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Player")
-		void SetIndex(int index);
+		void SetIndex(const int32 index);
 
 	/**
 	 * Allows us to make this player immortal.
@@ -122,7 +122,7 @@ public:
 	 * @return int the index number for this player.
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Player")
-		int GetIndex();
+		int32& GetIndex();
 
 	/**
 	 * Provides access to the current status for infinite lives for this player.
@@ -148,10 +148,12 @@ public:
 protected:
 	bool is_spawning_ = false;
 	bool can_be_attacked_ = true, can_use_pickups_ = true;
-	int player_index_ = 0;
 	float original_speed_ = 1.0f;
 	float speed_ = 1.0f;
 	FVector spawn_position_;
+
+	UPROPERTY(EditAnywhere, Category = "Player Properties")		// How many lives does this player have?
+		int32 player_index_ = -1;
 
 	UPROPERTY(EditAnywhere, Category = "Player Properties")		// Will this player be able to constantly respawn in or not?
 		bool has_infinite_lives_ = false;
