@@ -49,8 +49,7 @@ class AMAZABALLZ_API AC_Boulder : public AActor
 		virtual void Tick(float DeltaSeconds) override;
 
 	protected:
-		//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Boulder Properties")
-			int32 number_of_players_;
+		int32 number_of_players_;
 
 		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Boulder Properties")		// How much force should be applied to start this boulder rolling?
 			FVector starting_force_;	

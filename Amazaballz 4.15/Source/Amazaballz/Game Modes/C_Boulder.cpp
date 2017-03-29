@@ -18,11 +18,6 @@ void AC_Boulder::BeginPlay()
 	TArray<AActor*> players;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AC_Character::StaticClass(), players);
 	number_of_players_ = players.Num();
-
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("Num of players %i"), number_of_players_));
-	}
 }
 
 void AC_Boulder::Push(const FVector force)
