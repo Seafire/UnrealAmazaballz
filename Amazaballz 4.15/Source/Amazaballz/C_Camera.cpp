@@ -13,11 +13,6 @@ void AC_Camera::Tick(float DeltaSeconds)
 		}
 		case(E_CameraType::Type::CT_SCROLL_TARGET) :
 		{
-			if (target_)
-			{
-				SetActorLocation(target_->GetActorLocation());
-			}
-
 			break;
 		}
 		default:
