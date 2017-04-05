@@ -28,10 +28,10 @@ class AMAZABALLZ_API AC_ProceduralLevelGenerator : public AActor
 			int map_size_y_ = 10;
 
 		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Chunks")				// How wide can chunks be?
-			float chunk_size_x_ = 1000.0f;
+			float chunk_size_x_ = 10.0f;
 
 		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Chunks")				// How long can chunks be?
-			float chunk_size_y_ = 1000.0f;
+			float chunk_size_y_ = 10.0f;
 
 		TArray<ULevelStreaming*> procedural_chunks_;
 
