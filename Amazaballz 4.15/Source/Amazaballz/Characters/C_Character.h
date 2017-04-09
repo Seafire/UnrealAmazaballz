@@ -29,6 +29,18 @@ public:
 		float BaseLookUpRate;
 
 	/**
+	 * Provides a way for this character to attack.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		virtual void Attack();
+
+	/**
+	 * Stops attacking.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		virtual void StopAttack();
+
+	/**
 	 * Provides a way for this character to respawn.
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Player")
@@ -68,6 +80,13 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Player")
 		void SetInfiniteLives(const bool value);
+
+	/**
+	 * Sets the current attack state.
+	 * @param value if this player is attacking or not.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		void SetAttackState(const bool value);
 
 	/**
 	 * Allows us to alter the speed of this character.
@@ -132,6 +151,13 @@ public:
 		bool& HasInfiniteLives();
 
 	/**
+	 * Provides access to the attack status of the player.
+	 * @return bool& if this player is attacking or not.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		bool& IsAttacking();
+
+	/**
 	 * Provides access to the current speed modifier for this character.
 	 * @return float& the value of the speed modifier for this character.
 	 */
@@ -148,9 +174,11 @@ public:
 protected:
 	bool is_spawning_ = false;
 	bool can_be_attacked_ = true, can_use_pickups_ = true;
+	bool is_attacking_ = false;
 	float original_speed_ = 1.0f;
 	float speed_ = 1.0f;
 	FVector spawn_position_;
+	AActor* current_target_;
 
 	UPROPERTY(EditAnywhere, Category = "Player Properties")		// How many lives does this player have?
 		int32 player_index_ = -1;
@@ -160,6 +188,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Player Properties")		// How many lives does this player have?
 		int lives_ = 3;
+
+	UPROPERTY(EditAnywhere, Category = "Player Properties")		// How much force does each attack have?
+		float attack_force_ = 1000.0f;
 
 	/** Resets HMD orientation in VR. */
 	void OnResetVR();
@@ -193,7 +224,13 @@ protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	// End of APawn interface
 
-	
+	float ray_distance_ = 100.0f;
+
+	/**
+	 * Performs a raycast from this character.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		void Raycast();
 
 public:
 	/** Returns CameraBoom subobject **/

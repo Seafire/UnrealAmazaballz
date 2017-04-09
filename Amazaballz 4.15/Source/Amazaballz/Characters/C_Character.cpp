@@ -27,6 +27,7 @@ AC_Character::AC_Character()
 
 	// Setting custom player properties.
 	original_speed_ = speed_;
+	current_target_ = nullptr;
 
 	if (player_index_ != -1)
 	{
@@ -44,6 +45,8 @@ void AC_Character::SetupPlayerInputComponent(class UInputComponent* PlayerInputC
 	check(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &AC_Character::Attack);
+	PlayerInputComponent->BindAction("Attack", IE_Released, this, &AC_Character::StopAttack);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AC_Character::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AC_Character::MoveRight);
@@ -116,6 +119,46 @@ void AC_Character::MoveRight(float Value)
 	}
 }
 
+void AC_Character::Attack()
+{
+	if (current_target_ == nullptr)
+		return;
+
+	is_attacking_ = true;
+
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("Attack")));
+	}
+
+	if (current_target_->ActorHasTag("Player"))
+	{
+		// Attack this player...
+		FVector attack_force(attack_force_, attack_force_, attack_force_);
+		AC_Character* target_player = Cast<AC_Character>(current_target_);
+
+		if (target_player != nullptr)
+		{
+			FVector direction = GetActorLocation() - target_player->GetActorLocation();
+
+			direction.Normalize();
+			attack_force *= direction;
+
+			target_player->GetCharacterMovement()->AddInputVector(attack_force, true);
+
+			if (GEngine)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("PUSH")));
+			}
+		}
+	}
+}
+
+void AC_Character::StopAttack()
+{
+	is_attacking_ = false;
+}
+
 void AC_Character::Respawn()
 {
 	// If this player should be able to just constantly respawn back into the game.
@@ -144,6 +187,31 @@ void AC_Character::Respawn()
 	}
 }
 
+void AC_Character::Raycast()
+{
+	FCollisionQueryParams RV_TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
+	RV_TraceParams.bTraceComplex = true;
+	RV_TraceParams.bTraceAsyncScene = true;
+	RV_TraceParams.bReturnPhysicalMaterial = false;
+
+	//Re-initialize hit info
+	FHitResult RV_Hit(ForceInit);
+	FVector end = GetActorLocation() + (ray_distance_ * GetActorForwardVector());
+
+	//call GetWorld() from within an actor extending class
+	GetWorld()->LineTraceSingleByChannel
+	(
+		RV_Hit, //result
+		GetActorLocation(), //start
+		end, //end
+		ECC_Pawn, //collision channel
+		RV_TraceParams
+	);
+
+	if (current_target_ != RV_Hit.GetActor())
+		current_target_ = RV_Hit.GetActor();
+}
+
 void AC_Character::SetSpawningStatus(const bool value)
 {
 	is_spawning_ = value;
@@ -167,6 +235,11 @@ void AC_Character::SetIndex(const int32 index)
 void AC_Character::SetInfiniteLives(const bool value)
 {
 	has_infinite_lives_ = value;
+}
+
+void AC_Character::SetAttackState(const bool value)
+{
+	is_attacking_ = value;
 }
 
 void AC_Character::SetSpeed(const float speedMultiplier)
@@ -202,6 +275,11 @@ bool& AC_Character::CanBeAttacked()
 bool& AC_Character::CanUsePickups()
 {
 	return can_use_pickups_;
+}
+
+bool& AC_Character::IsAttacking()
+{
+	return is_attacking_;
 }
 
 int32& AC_Character::GetIndex()
