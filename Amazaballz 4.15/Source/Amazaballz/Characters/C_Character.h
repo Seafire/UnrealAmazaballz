@@ -41,6 +41,18 @@ public:
 		virtual void StopAttack();
 
 	/**
+	 * Provides a way for this character to attack.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		virtual void Defend();
+
+	/**
+	 * Stops attacking.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Player")
+		virtual void StopDefend();
+
+	/**
 	 * Provides a way for this character to respawn.
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Player")

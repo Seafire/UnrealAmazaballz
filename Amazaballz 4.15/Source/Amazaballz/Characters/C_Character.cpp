@@ -47,6 +47,8 @@ void AC_Character::SetupPlayerInputComponent(class UInputComponent* PlayerInputC
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 	PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &AC_Character::Attack);
 	PlayerInputComponent->BindAction("Attack", IE_Released, this, &AC_Character::StopAttack);
+	PlayerInputComponent->BindAction("Defend", IE_Pressed, this, &AC_Character::Defend);
+	PlayerInputComponent->BindAction("Defend", IE_Released, this, &AC_Character::StopDefend);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AC_Character::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AC_Character::MoveRight);
@@ -121,35 +123,35 @@ void AC_Character::MoveRight(float Value)
 
 void AC_Character::Attack()
 {
+	// We are now attacking, this will trigger the animation.
+	is_attacking_ = true;
+
+	// Make sure we have a target.
 	if (current_target_ == nullptr)
 		return;
 
-	is_attacking_ = true;
-
 	if (GEngine)
-	{
 		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("Attack")));
-	}
 
 	if (current_target_->ActorHasTag("Player"))
 	{
 		// Attack this player...
-		FVector attack_force(attack_force_, attack_force_, attack_force_);
 		AC_Character* target_player = Cast<AC_Character>(current_target_);
+		
+		// If the player is defending or has a defensive pickup, just return.
+		if (!target_player->CanBeAttacked())
+			return;
 
 		if (target_player != nullptr)
 		{
-			FVector direction = GetActorLocation() - target_player->GetActorLocation();
-
+			// Push the target player back with the desired amount of force in the correct direction.
+			const FVector force(attack_force_, attack_force_, attack_force_);
+			FVector direction = target_player->GetActorLocation() - GetActorLocation();
 			direction.Normalize();
-			attack_force *= direction;
 
-			target_player->GetCharacterMovement()->AddInputVector(attack_force, true);
-
+			target_player->GetCharacterMovement()->Velocity += (force * direction);
 			if (GEngine)
-			{
 				GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("PUSH")));
-			}
 		}
 	}
 }
@@ -157,6 +159,16 @@ void AC_Character::Attack()
 void AC_Character::StopAttack()
 {
 	is_attacking_ = false;
+}
+
+void AC_Character::Defend()
+{
+	can_be_attacked_ = false;
+}
+
+void AC_Character::StopDefend()
+{
+	can_be_attacked_ = true;
 }
 
 void AC_Character::Respawn()
