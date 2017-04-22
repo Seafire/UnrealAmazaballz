@@ -1,0 +1,88 @@
+/MANIFEST:NO
+/NOLOGO
+/DEBUG
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/FIXED:No
+/NXCOMPAT
+/STACK:5000000
+/DELAY:UNLOAD
+/DLL
+/PDBALTPATH:%_PDB%
+/OPT:NOREF
+/OPT:NOICF
+/INCREMENTAL:NO
+/ignore:4199
+/ignore:4099
+/DELAYLOAD:"d3d12.dll"
+/NODEFAULTLIB:"LIBCMT"
+/NODEFAULTLIB:"LIBCPMT"
+/NODEFAULTLIB:"LIBCMTD"
+/NODEFAULTLIB:"LIBCPMTD"
+/NODEFAULTLIB:"MSVCRTD"
+/NODEFAULTLIB:"MSVCPRTD"
+/NODEFAULTLIB:"LIBC"
+/NODEFAULTLIB:"LIBCP"
+/NODEFAULTLIB:"LIBCD"
+/NODEFAULTLIB:"LIBCPD"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\PCH.Amazaballz.h.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\Amazaballz.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_Camera.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\MovingObject.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_Character.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_Player.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_MovingObjectComponent.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_Ball.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_Boulder.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_Net.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_BaseObstacle.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_HoleObstacle.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_PitObstacle.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_BasePickup.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_CrystalSkullPickup.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_DisablePickup.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_FreezePickup.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_InvisibilityPickup.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_MirrorPickup.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_SpeedBoostPickup.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_SpeedsterPickup.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\C_ProceduralLevelGenerator.cpp.obj"
+"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\Amazaballz.generated.cpp.obj"
+"C:\Program Files\Epic Games\UE_4.15\Engine\Intermediate\Build\Win64\UE4Editor\Development\Amazaballz\PCLaunch.rc.res"
+"C:\Program Files\Epic Games\UE_4.15\Engine\Intermediate\Build\Win64\UE4Editor\Development\ModuleVersionResource.rc.inl.res"
+"delayimp.lib"
+"wininet.lib"
+"rpcrt4.lib"
+"ws2_32.lib"
+"dbghelp.lib"
+"comctl32.lib"
+"Winmm.lib"
+"kernel32.lib"
+"user32.lib"
+"gdi32.lib"
+"winspool.lib"
+"comdlg32.lib"
+"advapi32.lib"
+"shell32.lib"
+"ole32.lib"
+"oleaut32.lib"
+"uuid.lib"
+"odbc32.lib"
+"odbccp32.lib"
+"netapi32.lib"
+"iphlpapi.lib"
+"setupapi.lib"
+"dwmapi.lib"
+"imm32.lib"
+"C:\Program Files\Epic Games\UE_4.15\Engine\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-Slate.lib"
+"C:\Program Files\Epic Games\UE_4.15\Engine\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-SlateCore.lib"
+"C:\Program Files\Epic Games\UE_4.15\Engine\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-Engine.lib"
+"C:\Program Files\Epic Games\UE_4.15\Engine\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-Core.lib"
+"C:\Program Files\Epic Games\UE_4.15\Engine\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-CoreUObject.lib"
+"C:\Program Files\Epic Games\UE_4.15\Engine\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-InputCore.lib"
+"C:\Program Files\Epic Games\UE_4.15\Engine\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-UMG.lib"
+/OUT:"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Binaries\Win64\UE4Editor-Amazaballz-9804.dll"
+/IMPLIB:"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-Amazaballz-9804.suppressed.lib"
+/PDB:"C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Binaries\Win64\UE4Editor-Amazaballz-9804.pdb"
+/ignore:4078

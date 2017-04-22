@@ -1,0 +1,3 @@
+C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Source\Amazaballz\Amazaballz.Build.cs
+C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Source\Amazaballz.Target.cs
+C:\University\CGAD\Side_Projects\Amaze_ballz\AmazaballzRepository\Amazaballz 4.15 - DO NOT PUT ANOTHER COPY OF THE PROJECT IN THE REPO\Source\AmazaballzEditor.Target.cs
