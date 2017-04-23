@@ -18,8 +18,8 @@ void UC_PowerComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	AActor* parent = Super::GetOwner()->GetRootComponent()->GetAttachParent()->GetOwner();
-	power_bar_widget_ = parent->FindComponentByClass<UUserWidget>();
+	//AActor* parent = GetOwner();
+	//power_bar_widget_ = parent->FindComponentByClass<UWidgetComponent>();
 }
 
 void UC_PowerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)

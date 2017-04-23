@@ -84,6 +84,6 @@ class AMAZABALLZ_API UC_PowerComponent : public UActorComponent
 		UPROPERTY(EditAnywhere, Category = "Power Component")		// What is the maximum power level?
 			float maximum_power_ = 0.0f;
 
-		UUserWidget* power_bar_widget_ = nullptr;
+		//UWidgetComponent* power_bar_widget_ = nullptr;
 		bool at_maximum_ = false;									// Is this power component at the maximum power level?
 };
