@@ -89,6 +89,19 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_E_AffectedCharacters(E_A
 	{
 	}
 	IMPLEMENT_CLASS(AC_MirrorPickup, 2685046250);
+	void UC_PowerComponent::StaticRegisterNativesUC_PowerComponent()
+	{
+		FNativeFunctionRegistrar::RegisterFunction(UC_PowerComponent::StaticClass(), "GetMaxPower",(Native)&UC_PowerComponent::execGetMaxPower);
+		FNativeFunctionRegistrar::RegisterFunction(UC_PowerComponent::StaticClass(), "GetPower",(Native)&UC_PowerComponent::execGetPower);
+		FNativeFunctionRegistrar::RegisterFunction(UC_PowerComponent::StaticClass(), "IncreasePower",(Native)&UC_PowerComponent::execIncreasePower);
+		FNativeFunctionRegistrar::RegisterFunction(UC_PowerComponent::StaticClass(), "IsAtMax",(Native)&UC_PowerComponent::execIsAtMax);
+		FNativeFunctionRegistrar::RegisterFunction(UC_PowerComponent::StaticClass(), "SetPower",(Native)&UC_PowerComponent::execSetPower);
+	}
+	IMPLEMENT_CLASS(UC_PowerComponent, 3687060412);
+	void AC_OrbOfPowerPickup::StaticRegisterNativesAC_OrbOfPowerPickup()
+	{
+	}
+	IMPLEMENT_CLASS(AC_OrbOfPowerPickup, 2260791979);
 	void AC_SpeedBoostPickup::StaticRegisterNativesAC_SpeedBoostPickup()
 	{
 	}
@@ -176,8 +189,8 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_E_Team(E_Team_StaticEnum
 	ENGINE_API class UClass* Z_Construct_UClass_ACharacter();
 	ENGINE_API class UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
-	ENGINE_API class UClass* Z_Construct_UClass_ACameraActor();
 	ENGINE_API class UClass* Z_Construct_UClass_UActorComponent();
+	ENGINE_API class UClass* Z_Construct_UClass_ACameraActor();
 	COREUOBJECT_API class UScriptStruct* Z_Construct_UScriptStruct_FVector4();
 	ENGINE_API class UClass* Z_Construct_UClass_ULevelStreaming_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
@@ -228,6 +241,15 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_E_Team(E_Team_StaticEnum
 	AMAZABALLZ_API class UClass* Z_Construct_UClass_AC_InvisibilityPickup();
 	AMAZABALLZ_API class UClass* Z_Construct_UClass_AC_MirrorPickup_NoRegister();
 	AMAZABALLZ_API class UClass* Z_Construct_UClass_AC_MirrorPickup();
+	AMAZABALLZ_API class UFunction* Z_Construct_UFunction_UC_PowerComponent_GetMaxPower();
+	AMAZABALLZ_API class UFunction* Z_Construct_UFunction_UC_PowerComponent_GetPower();
+	AMAZABALLZ_API class UFunction* Z_Construct_UFunction_UC_PowerComponent_IncreasePower();
+	AMAZABALLZ_API class UFunction* Z_Construct_UFunction_UC_PowerComponent_IsAtMax();
+	AMAZABALLZ_API class UFunction* Z_Construct_UFunction_UC_PowerComponent_SetPower();
+	AMAZABALLZ_API class UClass* Z_Construct_UClass_UC_PowerComponent_NoRegister();
+	AMAZABALLZ_API class UClass* Z_Construct_UClass_UC_PowerComponent();
+	AMAZABALLZ_API class UClass* Z_Construct_UClass_AC_OrbOfPowerPickup_NoRegister();
+	AMAZABALLZ_API class UClass* Z_Construct_UClass_AC_OrbOfPowerPickup();
 	AMAZABALLZ_API class UClass* Z_Construct_UClass_AC_SpeedBoostPickup_NoRegister();
 	AMAZABALLZ_API class UClass* Z_Construct_UClass_AC_SpeedBoostPickup();
 	AMAZABALLZ_API class UClass* Z_Construct_UClass_AC_SpeedsterPickup_NoRegister();
@@ -1293,6 +1315,214 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AC_MirrorPickup(Z_Construct_UClass_AC_MirrorPickup, &AC_MirrorPickup::StaticClass, TEXT("AC_MirrorPickup"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AC_MirrorPickup);
+	UFunction* Z_Construct_UFunction_UC_PowerComponent_GetMaxPower()
+	{
+		struct C_PowerComponent_eventGetMaxPower_Parms
+		{
+			float ReturnValue;
+		};
+		UObject* Outer=Z_Construct_UClass_UC_PowerComponent();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("GetMaxPower"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(C_PowerComponent_eventGetMaxPower_Parms));
+			UProperty* NewProp_ReturnValue = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("ReturnValue"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(ReturnValue, C_PowerComponent_eventGetMaxPower_Parms), 0x0010000000000580);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Power Component"));
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Components/C_PowerComponent.h"));
+			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("Provides a way to get the maximum power level."));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_UC_PowerComponent_GetPower()
+	{
+		struct C_PowerComponent_eventGetPower_Parms
+		{
+			float ReturnValue;
+		};
+		UObject* Outer=Z_Construct_UClass_UC_PowerComponent();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("GetPower"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(C_PowerComponent_eventGetPower_Parms));
+			UProperty* NewProp_ReturnValue = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("ReturnValue"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(ReturnValue, C_PowerComponent_eventGetPower_Parms), 0x0010000000000580);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Power Component"));
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Components/C_PowerComponent.h"));
+			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("Provides a way to get the current power level."));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_UC_PowerComponent_IncreasePower()
+	{
+		struct C_PowerComponent_eventIncreasePower_Parms
+		{
+			float increment;
+		};
+		UObject* Outer=Z_Construct_UClass_UC_PowerComponent();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("IncreasePower"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(C_PowerComponent_eventIncreasePower_Parms));
+			UProperty* NewProp_increment = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("increment"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(increment, C_PowerComponent_eventIncreasePower_Parms), 0x0010000000000080);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Power Component"));
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Components/C_PowerComponent.h"));
+			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("Provides a way to increase the current power level by a specific amount."));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_UC_PowerComponent_IsAtMax()
+	{
+		struct C_PowerComponent_eventIsAtMax_Parms
+		{
+			bool ReturnValue;
+		};
+		UObject* Outer=Z_Construct_UClass_UC_PowerComponent();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("IsAtMax"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(C_PowerComponent_eventIsAtMax_Parms));
+			CPP_BOOL_PROPERTY_BITMASK_STRUCT(ReturnValue, C_PowerComponent_eventIsAtMax_Parms, bool);
+			UProperty* NewProp_ReturnValue = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("ReturnValue"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(ReturnValue, C_PowerComponent_eventIsAtMax_Parms), 0x0010000000000580, CPP_BOOL_PROPERTY_BITMASK(ReturnValue, C_PowerComponent_eventIsAtMax_Parms), sizeof(bool), true);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Power Component"));
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Components/C_PowerComponent.h"));
+			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("Provides a way to see if this power component is at the maximum power level."));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_UC_PowerComponent_SetPower()
+	{
+		struct C_PowerComponent_eventSetPower_Parms
+		{
+			float new_power;
+		};
+		UObject* Outer=Z_Construct_UClass_UC_PowerComponent();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("SetPower"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(C_PowerComponent_eventSetPower_Parms));
+			UProperty* NewProp_new_power = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("new_power"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(new_power, C_PowerComponent_eventSetPower_Parms), 0x0010000000000080);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Power Component"));
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Components/C_PowerComponent.h"));
+			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("Provides a way to set the current power level."));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UClass* Z_Construct_UClass_UC_PowerComponent_NoRegister()
+	{
+		return UC_PowerComponent::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UC_PowerComponent()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_Amazaballz();
+			OuterClass = UC_PowerComponent::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20B00080;
+
+				OuterClass->LinkChild(Z_Construct_UFunction_UC_PowerComponent_GetMaxPower());
+				OuterClass->LinkChild(Z_Construct_UFunction_UC_PowerComponent_GetPower());
+				OuterClass->LinkChild(Z_Construct_UFunction_UC_PowerComponent_IncreasePower());
+				OuterClass->LinkChild(Z_Construct_UFunction_UC_PowerComponent_IsAtMax());
+				OuterClass->LinkChild(Z_Construct_UFunction_UC_PowerComponent_SetPower());
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_maximum_power_ = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("maximum_power_"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(maximum_power_, UC_PowerComponent), 0x0020080000000001);
+				UProperty* NewProp_power_ = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("power_"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(power_, UC_PowerComponent), 0x0020080000000001);
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UC_PowerComponent_GetMaxPower(), "GetMaxPower"); // 804515703
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UC_PowerComponent_GetPower(), "GetPower"); // 1428846367
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UC_PowerComponent_IncreasePower(), "IncreasePower"); // 3777073729
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UC_PowerComponent_IsAtMax(), "IsAtMax"); // 1543975207
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UC_PowerComponent_SetPower(), "SetPower"); // 333550088
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Components/C_PowerComponent.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Components/C_PowerComponent.h"));
+				MetaData->SetValue(OuterClass, TEXT("ToolTip"), TEXT("Any actor can now store power."));
+				MetaData->SetValue(NewProp_maximum_power_, TEXT("Category"), TEXT("Power Component"));
+				MetaData->SetValue(NewProp_maximum_power_, TEXT("ModuleRelativePath"), TEXT("Components/C_PowerComponent.h"));
+				MetaData->SetValue(NewProp_maximum_power_, TEXT("ToolTip"), TEXT("What is the maximum power level?"));
+				MetaData->SetValue(NewProp_power_, TEXT("Category"), TEXT("Power Component"));
+				MetaData->SetValue(NewProp_power_, TEXT("ModuleRelativePath"), TEXT("Components/C_PowerComponent.h"));
+				MetaData->SetValue(NewProp_power_, TEXT("ToolTip"), TEXT("What amount should the power level start at?"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UC_PowerComponent(Z_Construct_UClass_UC_PowerComponent, &UC_PowerComponent::StaticClass, TEXT("UC_PowerComponent"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UC_PowerComponent);
+	UClass* Z_Construct_UClass_AC_OrbOfPowerPickup_NoRegister()
+	{
+		return AC_OrbOfPowerPickup::StaticClass();
+	}
+	UClass* Z_Construct_UClass_AC_OrbOfPowerPickup()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_AC_BasePickup();
+			Z_Construct_UPackage__Script_Amazaballz();
+			OuterClass = AC_OrbOfPowerPickup::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20900080;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_amount_of_power_ = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("amount_of_power_"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(amount_of_power_, AC_OrbOfPowerPickup), 0x0040000000000001);
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Game Modes/C_OrbOfPowerPickup.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Game Modes/C_OrbOfPowerPickup.h"));
+				MetaData->SetValue(OuterClass, TEXT("ToolTip"), TEXT("Provides a way for players to build up power."));
+				MetaData->SetValue(NewProp_amount_of_power_, TEXT("Category"), TEXT("Pickup Properties"));
+				MetaData->SetValue(NewProp_amount_of_power_, TEXT("ModuleRelativePath"), TEXT("Game Modes/C_OrbOfPowerPickup.h"));
+				MetaData->SetValue(NewProp_amount_of_power_, TEXT("ToolTip"), TEXT("How much power palpatine?"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AC_OrbOfPowerPickup(Z_Construct_UClass_AC_OrbOfPowerPickup, &AC_OrbOfPowerPickup::StaticClass, TEXT("AC_OrbOfPowerPickup"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(AC_OrbOfPowerPickup);
 	UClass* Z_Construct_UClass_AC_SpeedBoostPickup_NoRegister()
 	{
 		return AC_SpeedBoostPickup::StaticClass();
@@ -2220,8 +2450,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/Amazaballz")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0xD64B8C13;
-			Guid.B = 0x0E833AAC;
+			Guid.A = 0x1B904B05;
+			Guid.B = 0x8BD56E30;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

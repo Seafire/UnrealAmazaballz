@@ -39,6 +39,12 @@
 #ifndef AMAZABALLZ_C_MirrorPickup_generated_h
 	#include "Pickups/C_MirrorPickup.h"
 #endif
+#ifndef AMAZABALLZ_C_PowerComponent_generated_h
+	#include "Components/C_PowerComponent.h"
+#endif
+#ifndef AMAZABALLZ_C_OrbOfPowerPickup_generated_h
+	#include "Game Modes/C_OrbOfPowerPickup.h"
+#endif
 #ifndef AMAZABALLZ_C_SpeedBoostPickup_generated_h
 	#include "Pickups/C_SpeedBoostPickup.h"
 #endif
