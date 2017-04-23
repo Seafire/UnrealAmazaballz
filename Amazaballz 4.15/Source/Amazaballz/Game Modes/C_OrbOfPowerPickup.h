@@ -26,6 +26,9 @@ class AMAZABALLZ_API AC_OrbOfPowerPickup : public AC_BasePickup
 {
 	GENERATED_BODY()
 	
+	/*public:
+		AC_OrbOfPowerPickup();*/
+
 	protected:
 		/**
 		 * Provides a standard response for colliding with this pickup.
@@ -41,7 +44,13 @@ class AMAZABALLZ_API AC_OrbOfPowerPickup : public AC_BasePickup
 		void ApplyPickupEffect() override;
 		void UndoPickupEffect() override;
 
+		//UPROPERTY(VisibleAnywhere, Category = "Pickup Properties")		// How much power palpatine?
+		//	UParticleSystemComponent* particle_system_;
+
 	private:
+		bool picked_up_ = false;
+		UStaticMeshComponent* pickup_mesh_ = nullptr;
+
 		UPROPERTY(EditAnywhere, Category = "Pickup Properties")		// How much power palpatine?
 			float amount_of_power_ = 10.0f;	
 };

@@ -3,6 +3,11 @@
 #include "Amazaballz.h"
 #include "C_OrbOfPowerPickup.h"
 
+//AC_OrbOfPowerPickup::AC_OrbOfPowerPickup()
+//{
+//	particle_system_ = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Particle System Component"));
+//}
+
 void AC_OrbOfPowerPickup::PickupResponse(AActor* actor)
 {
 	// Accessing the static mesh component of the character and checking if the actor is a player character.
@@ -13,23 +18,27 @@ void AC_OrbOfPowerPickup::PickupResponse(AActor* actor)
 	{
 		AC_Character* player = Cast<AC_Character>(actor);
 		UC_PowerComponent* power_component = player->FindComponentByClass<UC_PowerComponent>();
+		pickup_mesh_ = FindComponentByClass<UStaticMeshComponent>();
 
-		if (power_component)
+		if (!picked_up_ && player->CanUsePickups())
 		{
-			if(!power_component->IsAtMax())
-				power_component->IncreasePower(amount_of_power_);
+			if (power_component)
+			{
+				if (!power_component->IsAtMax())
+					power_component->IncreasePower(amount_of_power_);
+			}
 
-			if (destroyed_after_use_)
-				PickupDestroy();
+			picked_up_ = true;
+			PickupDestroy();
 		}
 	}
 }
 
 void AC_OrbOfPowerPickup::PickupDestroy()
 {
-	// We could have something extra like a particle effect or something?
-	// Destroy this pickup.
-	Super::Destroy();
+	// Destroy the pickup.
+	pickup_mesh_->SetVisibility(false);
+	pickup_mesh_->DestroyComponent();
 }
 
 void AC_OrbOfPowerPickup::ApplyPickupEffect()
