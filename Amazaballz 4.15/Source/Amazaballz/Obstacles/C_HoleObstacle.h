@@ -6,7 +6,7 @@
  *
  * Created:		2017/03/04 19:45
  * Class Name:	AC_HoleObstacle
- * Base Class:	AActor
+ * Base Class:	AC_BaseObstacle
  * Author(s):	Jason Mottershead
  *
  * Purpose:		Provides more specific functionality for hole obstacles.
